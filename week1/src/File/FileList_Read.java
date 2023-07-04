@@ -19,5 +19,18 @@ public class FileList_Read {
 		else {
 			System.out.println("Directory doesn't exist or isn't a directory");
 		}
+		
+		//Read file
+		String filePath = "/home/hoanghainam/DE_internship/week1/Binary.txt";
+		try(BufferedReader reader = new BufferedReader(new FileReader(filePath))){
+			System.out.println("File: " + filePath);
+			String line;
+			while ((line = reader.readLine()) != null)
+				System.out.println(line);
+		}
+		catch (IOException e) {
+			System.out.println("Error");
+			e.printStackTrace(); //Tells what happened and where in the code this happened.
+		}
 	}
 }
