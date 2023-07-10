@@ -1,7 +1,7 @@
 package File;
 import java.io.*;
 
-public class FileList_Read {
+public class FileListRead {
 	public static void main(String[] args) {
 		String directoryPath = "/home/hoanghainam/DE_internship/week1";
 		

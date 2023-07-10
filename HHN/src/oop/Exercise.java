@@ -1,24 +1,13 @@
 package oop;
-
-public class Exercise extends Practice{
+	
+//Abstraction
+public abstract  class Exercise implements Practice{
 	//Encapsulation
 	protected String name;
 	protected String bodypart;
 	protected String category;
 	public int kg;
 	public int reps;
-	// Constructor	
-	public Exercise(String name, String bodypart, String category) {
-		super();
-		this.name = name;
-		this.bodypart = bodypart;
-		this.category = category;
-	}
-	// Static Polymorphism
-	public Exercise(String name) {
-		super();
-		this.name = name;
-	}
 
 	public String getName() {
 		return "Exercise name:" +  name;
@@ -50,7 +39,7 @@ public class Exercise extends Practice{
 	public void setReps(int reps) {
 		this.reps = reps;
 	}
-	void practice() {
+	public void practice() {
 		System.out.println("Practice exercise");
 	};
 }

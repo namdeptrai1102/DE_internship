@@ -1,22 +1,24 @@
 package oop;
 
-public class Push extends Exercise{
-	//Inheritance
-	public Push(String name, String part, String category) {
-		super(name, part, category);
-		// TODO Auto-generated constructor stub
+public class Push extends Exercise {
+	//Inheritance parameters
+	public Push(String name, String bodypart, String category) {
+		this.name = name;
+		this.bodypart = bodypart;
+		this.category = category;
 	}
+	// Static Polymorphism
 	public Push(String name) {
-		super(name);
 		this.name = name;
 	}
+	
 	public String getName() {
 		return "Push exercice name:" +  name;
 	}
 	public String getCategory() {
 		return "Push exercise category:" + category;
 	}
-	void practice() {
+	public void practice() {
 		System.out.println("Practice push exercise");
 	};
 	
