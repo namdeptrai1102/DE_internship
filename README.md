@@ -13,5 +13,6 @@
 (4) xong sớm có thể báo review sớm và chuyển sang phần tiếp theo  
 (5) trước khi review yêu cầu viết file report(các công việc đã làm, kết quả công việc,
 code nếu có, các khó khăn cần giải đáp) bằng markdown đẩy lên github cá nhân sau đó gửi
-trước cho người hướng dẫn, mỗi tuần là một file markdown.
-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
+trước cho người hướng dẫn, mỗi tuần là một file markdown.  
+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
+
