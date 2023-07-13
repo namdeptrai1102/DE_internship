@@ -41,10 +41,45 @@ tập sinh có thể code liên hệ với code cũ)
 - S: Elements are sorted? (Sắp xếp thứ tự)
 - TS: The collection is thread-safe (cấu trúc dữ liệu hoặc lớp có thể an toàn sử dụng đồng thời bởi nhiều luồng (threads) mà không gây ra các lỗi hoặc sự không nhất quán dữ liệu.)
 ## 2.2. Design Pattern
-### 2.2.1 Factory Method Pattern
-### 2.2.2 Adapter Pattern
-### 2.2.3 Observer Pattern
-## 2.3. Serialize
-
+Em đã đọc hết 23 design pattern tại trang https://www.javatpoint.com/design-patterns-in-java và triển khai 3 ví dụ phía dưới
+### 2.2.1 Factory Method Pattern (tham khảo diagram FactoryMethodPattern.png trong package FactoryMethodPattern)
+- Định nghĩa:
+  - Factory Method Pattern là một mẫu thiết kế (design pattern) thuộc nhóm mẫu Creational Pattern trong lập trình hướng đối tượng.
+  - Mục đích chính của mẫu Factory Method là cung cấp một giao diện chung để tạo đối tượng, nhưng cho phép các lớp con xác định loại cụ thể của đối tượng sẽ được tạo.
+- Thực hiện:
+  - Em tạo lớp trừu tượng Exercise với thuộc tính intensity cùng với 2 phương thức getIntensity() và restSecond() để tính thời gian nghỉ tùy thuộc loại hình tập luyện và số reps.
+  - 3 lớp con kế thừa lớp Exercise và ghi đè phương thức getIntensity ứng với mỗi loại hình luyện tập.
+  - Lớp GetExerciseFactory dùng để khởi tạo đúng loại hình luyện tập ứng với thông điệp được nhập vào.
+  - Lớp GenerateRestTime sẽ trả về thời gian nghỉ phù hợp với dữ liệu được nhập vào.
+### 2.2.2 Adapter Pattern (tham khảo diagram AdapterPattern.png trong package AdapterPattern)
+- Định nghĩa:
+  - Adapter Pattern là một mẫu thiết kế (design pattern) thuộc nhóm Structural Patterns trong lập trình hướng đối tượng.
+  - Nó cho phép các đối tượng hoạt động cùng nhau mặc dù có giao diện không tương thích hoặc không tương thích với nhau.
+  - Mục đích chính của mẫu Adapter là chuyển đổi giao diện của một đối tượng thành một giao diện khác mà client mong muốn sử dụng. Điều này giúp các đối tượng làm việc với nhau dễ dàng, ngay cả khi chúng có giao diện không tương thích ban đầu.
+- Thực hiện:
+  - Ban đầu em tạo 1 interface GymCard với 2 phương thức giveGymDetails() và getGymCard(), đây là giao diện mục tiêu giúp người dùng chỉ cần gửi thông tin và nhận xác thực mà không cần biết hệ thống được vận hành thế nào.
+  - Tiếp theo em tạo lớp GymDetails gồm các thuộc tính dữ liệu thẻ tập gym của người dùng và các phương thức getter và setter.
+  - Sau đó em tạo class GymCustomer kế thừa GymDetails và thực thi GymCard, đây chính là Adapter tham chiếu đến đối tượng GymDetails và triển khai giao diện mục tiêu là GumCard.
+  - Lớp ClienDemo đóng vai trò là người dùng thực hiện việc nhập thông tin và nhận xác thực.
+### 2.2.3 Observer Pattern (tham khảo diagram ObserverPattern.png trong package ObserverPattern)
+- Định nghĩa:
+  - Observer Pattern (a.k.a Publisher-Subscriber Pattern or Event-Subscriber Pattern) là một mẫu thiết kế hướng đối tượng trong lập trình, nằm trong nhóm mẫu thiết kế hành vi (behavioral design patterns).
+  - Nó cho phép các đối tượng (observers) đăng ký và theo dõi sự thay đổi của một đối tượng khác (subject) và tự động nhận thông báo khi sự thay đổi xảy ra.
+ - Thực hiện:
+   - Ban đầu em tạo giao diện Activity với 4 phương thức attach(), detach() (thêm, xóa người theo dõi), notifycation() và getState().
+   - Sau đó em tạo 1 giao diện Doing với phương thức update() được truyền vào đối tượng Activity.
+   - Tiếp theo em thực thi Activity bằng giao diện ConcreteActivity gồm 1 list 
+## 2.3. Serialize [package File]
+### 2.3.1 Serialized
+- Đầu tiên em tạo class Profile implements Serializable với 1 số thuộc tính và phương thức khởi tạo.
+- Tại class Serialized, em khởi tạo 1 Profile, serialized rồi in dữ liệu trước và sau khi deserialized.
+- Giải thích kết quả:
+  - name và sex được lưu thông qua serialization và khi được deserialized sẽ giữ nguyên giá trị khởi tạo (kể cả khi sex đã bị thay đổi sau bước serialization).
+  - age là biến static nên không được lưu thông qua serialization -> khi ta thay đổi age = 22 sau bước serialization thì output cũng được cập nhật.
+  - key là biến transient nên cũng không được lưu thông qua serialization -> kết quả = 0.
+  - biến valid cũng là transient nhưng vì có thêm từ khóa final -> kết quả luôn = 1
+### 2.3.2 Class FileIndirectWritingText
+- Ngoài việc viết thông điệp vào file IndirectBText.txt ở tuần 1, em đã viết thêm Serialization và Deserialization cho nó
+- 
 ### 3. Câu hỏi: 
-Cơ chế hashcode, thread-safe
+Cơ chế hashcode, thread-safe, thay đổi trước khi serialized 
