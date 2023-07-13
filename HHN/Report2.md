@@ -82,3 +82,7 @@ Em đã đọc hết 23 design pattern tại trang https://www.javatpoint.com/de
   - biến valid cũng là transient nhưng vì có thêm từ khóa final -> kết quả luôn = 1
 ### 2.3.2 Class FileIndirectWritingText
 - Ngoài việc viết thông điệp vào file IndirectBText.txt ở tuần 1, em đã viết thêm Serialization và Deserialization cho nó.
+### Note:
+-  Trong phần 2.3.1 và 2.3.2 em có sử dụng serialVersionUID là một trường có kiểu dữ liệu long được sử dụng để định danh phiên bản của một lớp. Trường này thường được sử dụng khi triển khai giao diện Serializable trong một lớp để quản lý phiên bản của lớp khi được serialize và deserialize.
+- Khi một lớp được serialize, serialVersionUID được sử dụng để xác định phiên bản của lớp đó và khi được deserialize thì nó kiểm tra xem phiên bản của lớp hiện tại có tương thích với phiên bản đã serialize hay không. Nếu serialVersionUID trong lớp hiện tại khác với serialVersionUID trong dữ liệu serialize, một ngoại lệ InvalidClassException sẽ được ném ra.
+- Thường thì serialVersionUID = 1L.
