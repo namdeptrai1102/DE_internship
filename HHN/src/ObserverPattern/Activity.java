@@ -1,8 +1,8 @@
 package ObserverPattern;
 
 public interface Activity {
-	void attach(Doing doing);
-	void detach(Doing doing);
-	void notifycation();
+	void attach(Member member);
+	void detach(Member member);
+	void notification();
 	int getState();
 }

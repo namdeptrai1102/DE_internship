@@ -1,10 +1,10 @@
 package ObserverPattern;
 
-public class ConcreteDoing implements Doing {
+public class ConcreteMember implements Member {
 	private int state;
 	private String doingName;
 	
-	public ConcreteDoing(String name) {
+	public ConcreteMember(String name) {
 		this.doingName= name;
 	}
 	

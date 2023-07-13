@@ -1,5 +1,5 @@
 package ObserverPattern;
 
-public interface Doing {
+public interface Member {
 	void update(Activity activity);
 }
