@@ -66,9 +66,11 @@ Em đã đọc hết 23 design pattern tại trang https://www.javatpoint.com/de
   - Observer Pattern (a.k.a Publisher-Subscriber Pattern or Event-Subscriber Pattern) là một mẫu thiết kế hướng đối tượng trong lập trình, nằm trong nhóm mẫu thiết kế hành vi (behavioral design patterns).
   - Nó cho phép các đối tượng (observers) đăng ký và theo dõi sự thay đổi của một đối tượng khác (subject) và tự động nhận thông báo khi sự thay đổi xảy ra.
  - Thực hiện:
-   - Ban đầu em tạo giao diện Activity với 4 phương thức attach(), detach() (thêm, xóa người theo dõi), notifycation() và getState().
-   - Sau đó em tạo 1 giao diện Doing với phương thức update() được truyền vào đối tượng Activity.
-   - Tiếp theo em thực thi Activity bằng giao diện ConcreteActivity gồm 1 list 
+   - Ban đầu em tạo giao diện Activity với 4 phương thức attach(), detach() (thêm, xóa người theo dõi), notification() và getState().
+   - Sau đó em tạo 1 giao diện Member với phương thức update() được truyền vào đối tượng Activity.
+   - Tiếp theo em thực thi Activity bằng giao diện ConcreteActivity gồm List<Member> và thuộc tính state, lớp này thêm phương thức setState() và ghi đè các phương thức của giao diện. Phương thức notification() duyệt memberList và update() từng phần tử.
+   - Lớp ConcreteMember thực thi giao diện Member ghi đè update() in ra trạng thái của member.
+   - Cuối cùng, lớp Demo chạy thử hệ thống. Nó thêm, xóa các thành viên và khi thay đổi trạng thái thì mọi thành viên đang có trong list đều được cập nhật tương ứng.
 ## 2.3. Serialize [package File]
 ### 2.3.1 Serialized
 - Đầu tiên em tạo class Profile implements Serializable với 1 số thuộc tính và phương thức khởi tạo.
@@ -76,10 +78,7 @@ Em đã đọc hết 23 design pattern tại trang https://www.javatpoint.com/de
 - Giải thích kết quả:
   - name và sex được lưu thông qua serialization và khi được deserialized sẽ giữ nguyên giá trị khởi tạo (kể cả khi sex đã bị thay đổi sau bước serialization).
   - age là biến static nên không được lưu thông qua serialization -> khi ta thay đổi age = 22 sau bước serialization thì output cũng được cập nhật.
-  - key là biến transient nên cũng không được lưu thông qua serialization -> kết quả = 0.
+  - key là biến transient nên không được serialization -> kết quả = 0.
   - biến valid cũng là transient nhưng vì có thêm từ khóa final -> kết quả luôn = 1
 ### 2.3.2 Class FileIndirectWritingText
-- Ngoài việc viết thông điệp vào file IndirectBText.txt ở tuần 1, em đã viết thêm Serialization và Deserialization cho nó
-- 
-### 3. Câu hỏi: 
-Cơ chế hashcode, thread-safe, thay đổi trước khi serialized 
+- Ngoài việc viết thông điệp vào file IndirectBText.txt ở tuần 1, em đã viết thêm Serialization và Deserialization cho nó.
