@@ -7,15 +7,16 @@ public class ConcreteActivity implements Activity{
 	private List<Member> memberlist = new ArrayList<>();
 	private int state;
 	
-	public int getState() {
-		return state;
-	}
-
 	public void setState(int state) {
 		this.state = state;
 		notification();
 	}
-
+	
+	@Override
+	public int getState() {
+		return state;
+	}
+	
 	@Override
 	public void attach(Member member) {
 		memberlist.add(member);
