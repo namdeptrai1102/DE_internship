@@ -24,6 +24,9 @@ tập sinh có thể code liên hệ với code cũ)
 - HashSet cung cấp các phương thức để thêm, xóa và kiểm tra sự tồn tại của các phần tử. 
 - Nó cũng cung cấp việc lặp qua các phần tử, nhưng không đảm bảo thứ tự của chúng.
 - Em đã tạo 1 class Hashset với 1 số phương thức như: thêm, xóa, kiểm tra tồn tại giá trị, kiểm tra rỗng, tính kích thước, tìm hashcode, clone, so sánh set.
+- Update: em đã tạo thêm 1 class exercise và thay đổi 1 chút lớp HashSet cho phù hợp
+  - Đối tượng Exercise có 2 thuộc tính là name và sec vì vậy cần ghi đè lại phương thức equals() so sánh các Exercise xem có bằng nhau không để đưa vào cùng 1 bucket và hashCode() để băm các Exercise đó trong HashSet.
+  - Ngoài ra em cũng ghi đè phương thức toString để có thể in ra được Exercise.
 ### 2.1.3 ArrayList
 - ArrayList là một mảng động có kích thước thay đổi linh hoạt.
 - Nó cung cấp các phương thức để thêm, xóa, truy cập và cập nhật phần tử.
