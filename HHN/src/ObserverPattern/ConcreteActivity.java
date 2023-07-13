@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConcreteActivity implements Activity{
-	private List<Member> doinglist = new ArrayList<>();
+	private List<Member> memberlist = new ArrayList<>();
 	private int state;
 	
 	public int getState() {
@@ -18,17 +18,17 @@ public class ConcreteActivity implements Activity{
 
 	@Override
 	public void attach(Member member) {
-		doinglist.add(member);
+		memberlist.add(member);
 	}
 
 	@Override
 	public void detach(Member member) {
-		doinglist.remove(member);
+		memberlist.remove(member);
 	}
 
 	@Override
 	public void notification() {
-		for (Member member : doinglist) {
+		for (Member member : memberlist) {
 			member.update(this);
 		}
 	}
