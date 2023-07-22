@@ -29,3 +29,18 @@
 ### 2.1.2 Thực hiện [package Exception]
 - Checked Exception: file IoException.java
 - Unchecked Exception: file Calc.java và file ArithemeticEx.java
+## 2.2 Cocurrency
+- Phần này em xin phép trình bày qua slide ạ https://www.canva.com/design/DAFo6BhKZXY/qwpkXGPuigRd35GkPeB1Jw/edit?utm_content=DAFo6BhKZXY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+## 2.3 JSON
+### 2.3.1 Tìm hiểu
+- JSON (JavaScript Object Notation) là một tiêu chuẩn mở dựa trên văn bản nhẹ được thiết kế để trao đổi dữ liệu mà con người có thể đọc được. Các quy ước được sử dụng bởi JSON được các lập trình viên biết đến, bao gồm C, C++, Java, Python, Perl, v.v.
+- Tinsh chất:
+  - JSON rất dễ đọc và viết.
+  - Nó là một định dạng trao đổi dựa trên văn bản nhẹ (lightweight text-based).
+  - JSON là ngôn ngữ độc lập.
+- Ứng dụng:
+  - Nó được sử dụng trong khi viết các ứng dụng dựa trên JavaScript bao gồm các tiện ích mở rộng trình duyệt và trang web.
+  - Định dạng JSON được sử dụng để serializing và truyền dữ liệu có cấu trúc qua kết nối mạng.
+  - Các dịch vụ web và API sử dụng định dạng JSON để cung cấp dữ liệu công khai.
+### 2.3.2 Thực hiện
+- Em đã tạo 1 maven project tên NamMavenProject, thêm 1 số dependencies gson trong file pom.xml
