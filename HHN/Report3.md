@@ -43,4 +43,8 @@
   - Định dạng JSON được sử dụng để serializing và truyền dữ liệu có cấu trúc qua kết nối mạng.
   - Các dịch vụ web và API sử dụng định dạng JSON để cung cấp dữ liệu công khai.
 ### 2.3.2 Thực hiện
-- Em đã tạo 1 maven project tên NamMavenProject, thêm 1 số dependencies gson trong file pom.xml
+- Em đã tạo 1 maven project tên NamMavenProject, thêm 1 số dependencies gson trong file pom.xml.
+- Em tạo đối tượng Exercise với 2 thuộc tính là name và reps.
+- Trong lớp ParseJson em serialize đối tượng Exercise bằng Gson, in ra rồi deserialize trở lại và in từng thuộc tính.
+- Em chuyển trực tiếp từ 1 string sang object trong lớp StringToObjectDirect và từ 1 json object thành string trong lớp JsonObjectToString.
+- Ngoài ra em cũng thử chuyển từ hashmap sang json với class HashMapJson.
