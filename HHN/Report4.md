@@ -34,6 +34,7 @@ Em đã cài đặt MySQL, MySQL workbench, extention VSCode lên localhost, th�
 ## 2.2 Tối ưu truy vấn
 Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triển khai 5 ví dụ câu tuy vấn không tối ưu và cách tối ưu chúng: https://github.com/namdeptrai1102/DE_internship/blob/main/QuerryQuerry.sql
 ## 2.3 Database
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/38552096-9da8-48db-bde3-5f2d1bca4c51)
 ### 2.3.1 SQL Database
 - Cơ sở dữ liệu SQL phù hợp để lưu trữ dữ liệu có cấu trúc.
 - Có hai loại ứng dụng:
@@ -105,3 +106,4 @@ Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triể
     - Các tính năng quan hệ: Neo4j hỗ trợ các tính năng quan hệ như các thuộc tính, chỉ mục, ghi chú, và trọng số cho các mối quan hệ. Điều này cho phép dữ liệu được biểu diễn một cách chi tiết và linh hoạt.
     - Mở rộng dễ dàng: Neo4j có thể mở rộng dễ dàng với các cụm và phân tán dữ liệu. Điều này cho phép nó xử lý các tập dữ liệu lớn và có khả năng mở rộng khi cần thiết.
   - Neo4j được sử dụng rộng rãi trong nhiều lĩnh vực, bao gồm mạng xã hội, e-commerce, phân tích dữ liệu phức tạp, quản lý nguồn lực, và nhiều ứng dụng khác có tính chất mạng.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5c9116bc-6214-4778-9d0c-2d918f0e8a43)
