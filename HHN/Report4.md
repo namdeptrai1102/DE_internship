@@ -31,3 +31,5 @@ Em đã cài đặt MySQL, MySQL workbench, extention VSCode lên localhost, th�
   - Memory (HEAP).
   - CSV.
   - Archive.
+## 2.1 Tối ưu truy vấn
+Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triển khai 5 ví dụ câu tuy vấn không tối ưu và cách tối ưu chúng.
