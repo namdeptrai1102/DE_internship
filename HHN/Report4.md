@@ -61,3 +61,47 @@ Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triể
   - Mức giá linh hoạt: Amazon Redshift sử dụng mô hình giá cước dựa trên lượng dữ liệu đã xử lý. Người dùng chỉ phải trả tiền cho lượng dữ liệu thực tế được truy vấn và không cần phải quản lý hạ tầng phức tạp.
 - Amazon Redshift là một giải pháp data warehouse mạnh mẽ và linh hoạt, hỗ trợ các doanh nghiệp và nhà phát triển trong việc xử lý và phân tích dữ liệu lớn một cách dễ dàng và hiệu quả.
 ### 2.3.2 No SQL Database
+*Cơ sở dữ liệu NoSQL phục vụ cho các loại dữ liệu bán cấu trúc: key-value, wide column, document (tree), và graph.*
+#### 2.3.2.1 Key-Value Database
+- Kho lưu trữ Key-value là CSDL từ điển hoặc hashmap. Nó được thiết kế cho các hoạt động CRUD với một khóa duy nhất cho mỗi bản ghi: CREAT (key-value), Read(key), Read(key), Delete(key, value)
+- Các giá trị không có schema cố định và có thể là bất kỳ thứ gì từ giá trị nguyên thủy đến cấu trúc phức hợp.
+- Key-value stores có khả năng phân vùng cao (do đó có thể mở rộng theo chiều ngang).
+- Redis là một kho lưu trữ key-value phổ biến:
+  - Redis chủ yếu được sử dụng để lưu trữ dữ liệu tạm thời, bộ đệm (cache) dữ liệu, và hỗ trợ cho các ứng dụng thời gian thực như chat, đếm ngược, phân tích dữ liệu, và hệ thống theo dõi.
+  - Điểm nổi bật của Redis:
+    - Hiệu suất cao: Redis hoạt động hoàn toàn trong bộ nhớ và sử dụng cấu trúc dữ liệu tối ưu để đạt được hiệu suất tốt nhất. Nó có thể xử lý hàng triệu lượt truy vấn mỗi giây, làm cho nó trở thành một trong những hệ quản trị cơ sở dữ liệu nhanh nhất.
+    - Hỗ trợ nhiều cấu trúc dữ liệu: Redis hỗ trợ nhiều cấu trúc dữ liệu như strings, hashes, lists, sets, sorted sets, bitmaps và hyperloglogs. Điều này cho phép lưu trữ và thao tác dữ liệu một cách linh hoạt và hiệu quả.
+    - Replication và High Availability(tính khả dung): Redis hỗ trợ sao chép dữ liệu và có khả năng High Availability thông qua việc cấu hình các node Redis thành các cụm sao chép và chịu lỗi.
+    - Hỗ trợ truy vấn atomic và transactions: Redis hỗ trợ các hoạt động atomic và transactions, cho phép thực hiện nhiều hoạt động trong một giao dịch, đảm bảo tính toàn vẹn dữ liệu.
+    - Lua scripting: Redis hỗ trợ thực thi các tập lệnh Lua bên trong máy chủ, cho phép người dùng thực hiện các tác vụ phức tạp và tùy chỉnh.
+  - Redis là một công cụ mạnh mẽ cho việc lưu trữ và truy xuất dữ liệu nhanh chóng và có hiệu suất cao. Nó được sử dụng rộng rãi trong các ứng dụng web, hệ thống thời gian thực, và bộ nhớ cache để cải thiện hiệu suất ứng dụng.
+#### 2.3.2.2 Wide-column Database
+- Wide-column Database có bảng, hàng và cột. Nhưng tên của các cột và loại của chúng có thể khác nhau đối với mỗi hàng trong cùng một bảng.
+- Về mặt logic, Nó là một ma trận thưa thớt được phiên bản với ánh xạ đa chiều (giá trị hàng, giá trị cột, dấu thời gian). Nó giống như một kho lưu trữ khóa-giá trị hai chiều, với mỗi giá trị ô được đánh phiên bản bằng dấu thời gian.
+- Wide-column Database có khả năng phân vùng cao. Nó có một khái niệm về họ cột được lưu trữ cùng nhau.
+- Tọa độ logic của một ô là: (Khóa hàng, Tên cột, Phiên bản).
+- Tra cứu vật lý như sau: Từ điển khu vực ⇒ Thư mục họ cột ⇒ Khóa hàng ⇒ Họ tên cột ⇒ Định tính cột ⇒ Phiên bản => Wide-column Database là cơ sở dữ liệu theo hàng.
+- Apache HBase là 1 ví dụ điển hình.
+Đọc thêm: https://www.slideshare.net/larsgeorge/hbase-in-practice
+#### 2.3.2.3 Document Database
+- Document Database dùng để lưu trữ và truy xuất tài liệu bao gồm các đối tượng lồng nhau, một cấu trúc cây như XML, JSON và YAML.
+- Document Database khai thác cấu trúc cây của giá trị để cung cấp các hoạt động phong phú hơn. Đây là CSDL hướng tài liệu.
+- MongoDB là một ví dụ phổ biến về Document Database.
+  - Điểm nổi bật:
+    - Tài liệu dưới dạng JSON: MongoDB lưu trữ dữ liệu dưới dạng các tài liệu JSON, giúp dễ dàng lưu trữ dữ liệu phức tạp và linh hoạt.
+    - Cơ sở dữ liệu không có cấu trúc cứng: MongoDB cho phép lưu trữ các tài liệu có cấu trúc khác nhau trong cùng một bảng (collection), không yêu cầu định nghĩa cơ sở dữ liệu cứng trước.
+    - Tích hợp tốt với các ngôn ngữ lập trình: MongoDB hỗ trợ nhiều ngôn ngữ lập trình như Java, Python, Node.js, và nhiều ngôn ngữ khác, giúp dễ dàng tích hợp vào các ứng dụng.
+    - Cung cấp các tính năng linh hoạt: MongoDB hỗ trợ các tính năng như Replica Set (đảm bảo bền vững dữ liệu), Sharding (mở rộng quy mô), Full-text search (tìm kiếm toàn văn bản), Aggregation (tổng hợp dữ liệu), và nhiều tính năng khác.
+    - Tích hợp tốt với công nghệ đám mây: MongoDB cung cấp phiên bản dành cho các môi trường đám mây như MongoDB Atlas, giúp dễ dàng triển khai và quản lý cơ sở dữ liệu trên đám mây.
+  - MongoDB được sử dụng rộng rãi trong các ứng dụng web, ứng dụng di động, hệ thống IoT, phân tích dữ liệu và các ứng dụng có yêu cầu lưu trữ dữ liệu phức tạp và linh hoạt.
+#### 2.3.2.4 Graph Database
+- Graph Database giống như Document Database nhưng được thiết kế cho đồ thị thay vì cây tài liệu.
+- Ví dụ, cơ sở dữ liệu đồ thị sẽ phù hợp để lưu trữ và truy vấn kết nối mạng xã hội, điển hình là Neo4j: 
+  - Neo4j là một hệ quản trị cơ sở dữ liệu đồ thị. Thay vì sử dụng cấu trúc bảng truyền thống như các hệ quản trị cơ sở dữ liệu quan hệ (SQL), Neo4j sử dụng mô hình đồ thị, trong đó dữ liệu được biểu diễn bằng các node (đỉnh) và các mối quan hệ (cạnh) giữa chúng.
+  - Đặc điểm nổi bật của Neo4j:
+    - Cơ sở dữ liệu đồ thị: Neo4j hỗ trợ lưu trữ dữ liệu dưới dạng đồ thị, cho phép biểu diễn và truy vấn các mối quan hệ phức tạp một cách hiệu quả. Điều này làm cho nó phù hợp cho các ứng dụng có tính chất mạng xã hội, lưới điện, định tuyến, phân tích dữ liệu phức tạp, và nhiều lĩnh vực khác.
+    - Ngôn ngữ truy vấn Cypher: Neo4j sử dụng ngôn ngữ truy vấn Cypher, một ngôn ngữ đồ thị đơn giản và trực quan để truy vấn dữ liệu. Cypher cho phép người dùng dễ dàng tạo các truy vấn phức tạp liên quan đến mối quan hệ giữa các node.
+    - Hiệu suất cao: Nhờ kiến trúc đồ thị, Neo4j cung cấp hiệu suất truy vấn cao đối với các dữ liệu có mối quan hệ phức tạp. Nó sử dụng các thuật toán tối ưu hóa để tối đa hóa thời gian truy vấn và đảm bảo tính mở rộng.
+    - Các tính năng quan hệ: Neo4j hỗ trợ các tính năng quan hệ như các thuộc tính, chỉ mục, ghi chú, và trọng số cho các mối quan hệ. Điều này cho phép dữ liệu được biểu diễn một cách chi tiết và linh hoạt.
+    - Mở rộng dễ dàng: Neo4j có thể mở rộng dễ dàng với các cụm và phân tán dữ liệu. Điều này cho phép nó xử lý các tập dữ liệu lớn và có khả năng mở rộng khi cần thiết.
+  - Neo4j được sử dụng rộng rãi trong nhiều lĩnh vực, bao gồm mạng xã hội, e-commerce, phân tích dữ liệu phức tạp, quản lý nguồn lực, và nhiều ứng dụng khác có tính chất mạng.
