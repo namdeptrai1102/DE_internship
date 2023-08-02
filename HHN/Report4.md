@@ -107,8 +107,7 @@ Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triể
     - Mở rộng dễ dàng: Neo4j có thể mở rộng dễ dàng với các cụm và phân tán dữ liệu. Điều này cho phép nó xử lý các tập dữ liệu lớn và có khả năng mở rộng khi cần thiết.
   - Neo4j được sử dụng rộng rãi trong nhiều lĩnh vực, bao gồm mạng xã hội, e-commerce, phân tích dữ liệu phức tạp, quản lý nguồn lực, và nhiều ứng dụng khác có tính chất mạng.
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5c9116bc-6214-4778-9d0c-2d918f0e8a43)
-# 3. Bonus
-## CAP (NoSQL)
+# 3. Bonus CAP (NoSQL)
 https://www.ibm.com/topics/cap-theorem
 - Thuật ngữ CAP gồm 3 thành phần:
   - Consistency (tính nhất quán): tất cả các máy khách đều nhìn thấy cùng một dữ liệu tại cùng một thời điểm, bất kể chúng kết nối với nút nào.
