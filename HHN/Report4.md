@@ -107,3 +107,14 @@ Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triể
     - Mở rộng dễ dàng: Neo4j có thể mở rộng dễ dàng với các cụm và phân tán dữ liệu. Điều này cho phép nó xử lý các tập dữ liệu lớn và có khả năng mở rộng khi cần thiết.
   - Neo4j được sử dụng rộng rãi trong nhiều lĩnh vực, bao gồm mạng xã hội, e-commerce, phân tích dữ liệu phức tạp, quản lý nguồn lực, và nhiều ứng dụng khác có tính chất mạng.
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5c9116bc-6214-4778-9d0c-2d918f0e8a43)
+# 3. Bonus
+## CAP (NoSQL)
+https://www.ibm.com/topics/cap-theorem
+- Thuật ngữ CAP gồm 3 thành phần:
+  - Consistency (tính nhất quán): tất cả các máy khách đều nhìn thấy cùng một dữ liệu tại cùng một thời điểm, bất kể chúng kết nối với nút nào.
+  - Availability (tính khả dụng): bất kỳ máy khách nào yêu cầu dữ liệu đều nhận được phản hồi, ngay cả khi một hoặc nhiều nút ngừng hoạt động.
+  - Partition tolerance (dung sai phân vùng): cụm phải tiếp tục hoạt động mặc dù có bất kỳ sự cố giao tiếp nào giữa các nút trong hệ thống (phân vùng ở đây nghĩa là điểm bị ngắt liên lạc trong HPT)
+-  NoSQL DB được phân loại dựa trên 2 tính chất CAP mà nó hỗ trợ:
+  - CP database (Consistency & Partition tolerance): Khi một phân vùng xảy ra giữa hai nút bất kỳ, hệ thống phải tắt nút không nhất quán (nghĩa là làm cho nó không khả dụng) cho đến khi phân vùng được giải quyết.[VD: MongoDB]
+  - AP database (Availability & Partition tolerance): Khi một phân vùng xảy ra, tất cả các nút vẫn khả dụng nhưng những nút ở đầu sai của phân vùng có thể trả về phiên bản dữ liệu cũ hơn các nút khác. Khi phân vùng được giải quyết, cơ sở dữ liệu AP thường đồng bộ lại các nút. [VD: Apache Cassandra]
+  - CA database (Consistency & Availability): mang lại tính nhất quán và tính khả dụng trên tất cả các nút. Tuy nhiên, nó không thể làm điều này nếu có một phân vùng giữa hai nút bất kỳ trong hệ thống -> không có khả năng chịu lỗi [chỉ có trên lý thuyết]
