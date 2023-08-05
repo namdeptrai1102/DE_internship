@@ -64,7 +64,7 @@ Em đã tạo file QuerryQuerry.sql để tạo 1 database đồng thời triể
 ### 2.3.2 No SQL Database
 *Cơ sở dữ liệu NoSQL phục vụ cho các loại dữ liệu bán cấu trúc: key-value, wide column, document (tree), và graph.*
 #### 2.3.2.1 Key-Value Database
-- Kho lưu trữ Key-value là CSDL từ điển hoặc hashmap. Nó được thiết kế cho các hoạt động CRUD với một khóa duy nhất cho mỗi bản ghi: CREAT (key-value), Read(key), Read(key), Delete(key, value)
+- Kho lưu trữ Key-value là CSDL từ điển hoặc hashmap. Nó được thiết kế cho các hoạt động CRUD với một khóa duy nhất cho mỗi bản ghi: CREAT (key-value), Read(key), Update(key), Delete(key, value)
 - Các giá trị không có schema cố định và có thể là bất kỳ thứ gì từ giá trị nguyên thủy đến cấu trúc phức hợp.
 - Key-value stores có khả năng phân vùng cao (do đó có thể mở rộng theo chiều ngang).
 - Redis là một kho lưu trữ key-value phổ biến:
