@@ -72,12 +72,35 @@
   - B-Tree lưu trữ dữ liệu sao cho mỗi nút chứa các khóa theo thứ tự tăng dần. Mỗi khóa này có hai tham chiếu đến hai nút con khác. Các khóa nút con bên trái nhỏ hơn các khóa hiện tại và các khóa nút con bên phải lớn hơn các khóa hiện tại. Nếu một nút có số lượng khóa là "n" thì nút đó có thể có tối đa "n+1" nút con.
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/abf8fab9-ca76-40ff-8c4c-9a5caa48ad43)
   - Tốc độ:
-   1.	Search	O(log n)
-   2.	Insert	O(log n)
-   3.	Delete	O(log n)
+   1.	Search O(log n)
+   2.	Insert O(log n)
+   3.	Delete O(log n)
 - B+Tree (InnoDB dùng cái này):
   - B+Tree là một cấu trúc dữ liệu khác được sử dụng để lưu trữ dữ liệu và trông gần giống như B-Tree. Sự khác biệt duy nhất là B+Tree lưu trữ dữ liệu trên các nút lá -> tất cả các giá trị nút không phải lá được sao chép lại trong các nút lá.
   - Các nút lá bao gồm tất cả các giá trị và tất cả các bản ghi được sắp xếp theo thứ tự. B+tree cho phép thực hiện tìm kiếm giống như B-tree, nhưng cũng cho phép duyệt qua tất cả các giá trị trong một nút lá nếu chúng ta đặt một con trỏ tới mỗi nút lá như sau.
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/23716ea1-2365-44c8-9a98-87951f2f6db9)
 - Tóm lại thì B+Tree sắp xếp nhanh hơn còn B-Tree nhanh hơn khi thêm giá trị vào giữa, nhưng nhìn chung thì B+Tree tốt hơn B-Tree.
-
+## 3.2 Trong NoSQL (em chỉ đọc tóm lược của MongoDB):
+- Cũng sử dụng cấu trúc B-tree.
+- Có thể hoàn toàn tùy biến tên của index, nhưng khi đã được tạo thì không sửa được nữa.
+- 1 số kiểu index:
+  - Single Field: đánh index theo 1 trường
+  - Compound Index: đánh index theo nhiều trường
+  - Multikey Index: hỗ trợ truy vấn các mảng trong các documents. Khi tạo một index trên một cột chứa mảng, MongoDB sẽ tạo một Multikey Index cho cột đó -> mỗi phần tử trong mảng sẽ trở thành một mục riêng biệt trong index.
+  - Geospatial Index: hỗ trợ các truy vấn dữ liệu tọa độ không gian địa lý
+  - Wildcard Indexes: sử dụng các chỉ mục ký tự đại diện để hỗ trợ truy vấn đối với nhiều trường tùy ý hoặc không xác định.
+  - Hashed Indexes: lập chỉ mục cho hàm băm của giá trị của một trường.
+# Q4: Ngoài đánh index theo số thứ tự thì có đánh index theo chuỗi được không?
+ĐƯỢC. Theo em thì mình chọn cột nào để đánh thì các giá trị cột đó sẽ trở thành Search Key thôi, tuy nhiên k nên làm vậy lắm vì nó tốn bộ nhớ hơn là sử dụng ID.
+# Q5: Đánh index cho nhiều cột hoạt động như thế nào?
+- Chỉ mục nhiều cột là chỉ mục lưu trữ dữ liệu trên tối đa 32 cột.
+- Khi tạo chỉ mục nhiều cột, thứ tự cột là rất quan trọng, các chỉ mục nhiều cột được cấu trúc để có cấu trúc phân cấp.
+- Giả sử ta có bảng đánh single-index như sau:
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b8597066-4f16-4ff5-b141-2435eda952be)
+  - Ta đánh index cho cột make:
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/6e49d40b-2d5c-4e7a-b21e-268535769c7b)
+  - Bây giờ bảng index có 1 cột gồm các con trỏ tới 1 bảng tham chiếu phụ được xếp theo cột make. Tương tự ta đánh index cho cả cột model
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/efbcbdb9-b1b8-4245-b9aa-95ea32e25224)
+- Ta có 1 câu truy vấn như sau: SELECT * FROM myTable WHERE year=2017 AND make='ACURA' AND model='TL';. Khi đó bảng index chính (ID:, year) sẽ được truy cập trước tiên rồi sẽ tham chiếu tới bảng tham chiếu phụ thứ nhất rồi tham chiếu tới bảng tham chiếu phụ thứ hai.
+- Tuy nhiên nếu ta chỉ truy vấn cột make và model thì lại không dùng Multicolumn Indexes được vì con trỏ tham chiếu tới 2 bảng phụ không thể truy cập được.
+- Xem thêm gifs trong link này để hiểu rõ hơn: https://dataschool.com/sql-optimization/multicolumn-indexes/
