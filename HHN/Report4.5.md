@@ -55,4 +55,29 @@
 - Backup:
   -  Các hệ thống OLTP được sao lưu thường xuyên hơn nhiều so với các hệ thống OLAP do bản chất của OLTP là một công cụ xử lý giao dịch -> cần phải sao lưu thường xuyên để duy trì hoạt động kinh doanh và tuân thủ các yêu cầu pháp lý và quy định có liên quan.
   -  Mọi mất dữ liệu phát sinh trong hệ thống OLAP đều có thể được khắc phục bằng cách tải lại dữ liệu bị mất từ ​​nguồn ban đầu.
+# Q3: Index hoạt động thế nào
+## 3.1 Trong SQL:
+- Index là 1 bảng gồm 2 cột (key-value) là Search Key và Data Reference, khi tạo index cho một cột, hệ thống cơ sở dữ liệu sẽ tạo một bản sao nhỏ của dữ liệu trong cột đó và duy trì một cấu trúc dữ liệu tìm kiếm nhanh để giữ cho các giá trị của cột được sắp xếp và dễ tìm kiếm.
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/3b4e129d-fab5-443c-9260-f49c59b68163)
+  - Data Reference chứa tập hợp các con trỏ chứa địa chỉ khối đĩa.
+  - Con trỏ khối đĩa chứa dữ liệu thực được tham chiếu bới Search Key.
+  - Data Reference còn được gọi là Block Pointer vì nó sử dụng địa chỉ dựa trên khối (block-based addressing)  
+    [Tìm hiểu thêm: Cái này em hiểu nó là một phương pháp để xác định các vị trí vật lý của dữ liệu trong hệ thống lưu trữ. Trong block-based addressing, không gian lưu trữ được chia thành các phần nhỏ và cố định gọi là "block" hoặc "sector". Mỗi block có kích thước nhất định, dữ liệu được lưu trữ trên các block này và được quản lý bằng cách sử dụng một bảng định vị (mapping table) để xác định vị trí của các block trong không gian lưu trữ vật lý.]  
+    [Tìm hiểu thêm: Mapping table là một cơ chế để ánh xạ địa chỉ logic sang địa chỉ vật lý và ngược lại, vì không gian lưu trữ ảo và không gian lưu trữ vật lý có thể khác nhau. ]
+- Vì các Index tables có kích thước nhỏ nên chúng được lưu trữ trong bộ nhớ chính.
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/0a6c1a8b-70f6-471a-a0a7-3cecde027f4b)
+- Index sắp xếp bằng cách sử dụng cấu trúc dữ liệu là Btree.
+### Tìm hiểu thêm về Btree trong DB:
+- B-Tree:
+  - B-Tree lưu trữ dữ liệu sao cho mỗi nút chứa các khóa theo thứ tự tăng dần. Mỗi khóa này có hai tham chiếu đến hai nút con khác. Các khóa nút con bên trái nhỏ hơn các khóa hiện tại và các khóa nút con bên phải lớn hơn các khóa hiện tại. Nếu một nút có số lượng khóa là "n" thì nút đó có thể có tối đa "n+1" nút con.
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/abf8fab9-ca76-40ff-8c4c-9a5caa48ad43)
+  - Tốc độ:
+   1.	Search	O(log n)
+   2.	Insert	O(log n)
+   3.	Delete	O(log n)
+- B+Tree (InnoDB dùng cái này):
+  - B+Tree là một cấu trúc dữ liệu khác được sử dụng để lưu trữ dữ liệu và trông gần giống như B-Tree. Sự khác biệt duy nhất là B+Tree lưu trữ dữ liệu trên các nút lá -> tất cả các giá trị nút không phải lá được sao chép lại trong các nút lá.
+  - Các nút lá bao gồm tất cả các giá trị và tất cả các bản ghi được sắp xếp theo thứ tự. B+tree cho phép thực hiện tìm kiếm giống như B-tree, nhưng cũng cho phép duyệt qua tất cả các giá trị trong một nút lá nếu chúng ta đặt một con trỏ tới mỗi nút lá như sau.
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/23716ea1-2365-44c8-9a98-87951f2f6db9)
+- Tóm lại thì B+Tree sắp xếp nhanh hơn còn B-Tree nhanh hơn khi thêm giá trị vào giữa, nhưng nhìn chung thì B+Tree tốt hơn B-Tree.
 
