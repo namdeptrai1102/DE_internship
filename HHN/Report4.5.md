@@ -104,3 +104,5 @@
 - Ta có 1 câu truy vấn như sau: SELECT * FROM myTable WHERE year=2017 AND make='ACURA' AND model='TL';. Khi đó bảng index chính (ID:, year) sẽ được truy cập trước tiên rồi sẽ tham chiếu tới bảng tham chiếu phụ thứ nhất rồi tham chiếu tới bảng tham chiếu phụ thứ hai.
 - Tuy nhiên nếu ta chỉ truy vấn cột make và model thì lại không dùng Multicolumn Indexes được vì con trỏ tham chiếu tới 2 bảng phụ không thể truy cập được.
 - Xem thêm gifs trong link này để hiểu rõ hơn: https://dataschool.com/sql-optimization/multicolumn-indexes/
+# Q6: Tại sao biết MongoDB thuộc loại CP và Cassandra thuộc loại AP?
+Em nghĩ việc phân loại rạch ròi CP, AP hay CA không hoàn toàn chính xác. Có thể 1 số hệ thống thường ưu tiên C hoặc A hoặc P hơn nhưng nhìn chung nó là sự đánh đổi. Các hệ thống trong thế giới thực hiếm khi nằm gọn gàng 1 trong 3 loại này. Phần này em sẽ tìm hiểu sâu hơn sau.
