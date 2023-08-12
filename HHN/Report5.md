@@ -37,7 +37,13 @@
     - Scheduler: phân phối resources disk, memory, CPU, network,...
   - Node Manager: khởi tạo containers, báo cáo tài nguyên sử dụng về Scheduler.
 - Workflow:
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/45f2cda7-14eb-495a-9825-35254592343b)
   - Client yêu cầu RM tạo 1 AM process
   - Client submits job và RM sẽ tìm 1 Node Manager khởi chạy container để lưu trữ AM process(đại diện cho client job/application)
   - Node Managers khác được khởi chạy containers hay mặt AM process để chạy tính toán phân tán (các nút được chọn để phân bổ vùng chứa mới càng gần dữ liệu đầu vào càng tốt)
+   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/75d1306c-07f5-44b2-84cc-78124ac08629)
+  - Việc ánh xạ công việc có thể xảy ra theo 3 cách:
+    - 1 job mỗi application.
+    - Nhiều job nỗi application: reused, dữ liệu giữa các công việc có thể được lưu vào bộ nhớ đệm.
+    - Ứng dụng chạy vĩnh viễn.
 # 4. SPARK
