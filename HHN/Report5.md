@@ -23,4 +23,7 @@
     - Big Data: cấu trúc lỏng lẻo và thường không được tinh chỉnh
     - Data Lake: lưu trữ dữ liệu thô, không có cấu trúc và có cấu trúc, thuộc mọi loại, kích thước và định dạng ở định dạng gốc (> data warehouse).
     - Data Mart: tập con của data warehouse, phục vụ nhu cầu của một bộ phận cụ thể trong một tổ chức.
-
+# 2. HDFS
+# 3. YARN & Map Reduce
+## 3.1 YARN
+# 4. SPARK
