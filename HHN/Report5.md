@@ -8,7 +8,7 @@
 - Big Data Defined:
   - Volume: Khối lượng dữ liệu
   - Velocity: Tốc độ truy cập và sử dụng dữ liệu
-  - Variety: đa dạng nguồn dữ liệu
+  - Variety: đa dạng nguồn dữ liệu  
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/be57e369-61ed-4a0a-9b2a-032cf4d32fab)
   - Hiện nay có thêm 4 đặc trưng khác: Veracity(xác thực), Value(giá trị, lợi ích), Visualization, Variability(khả năng thay đổi) 
 - Big data và data warehouse
@@ -29,5 +29,15 @@
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/06bb31f6-1d04-4a8e-8d41-fb97aae89409)
 - Responsibilities: 
-
+  - Quản lý tài nguyên cluster như máy tính, mạng và bộ nhớ
+  - Lập kế hoạch và giám sát công việc
+- Thực hiện thông qua 2 long-running daemons:
+  - Resource Manager:
+    - Applications Manager: chạy ApplicationMaster container (khác với docker, container ở đây chỉ là quy định về tài nguyên)
+    - Scheduler: phân phối resources disk, memory, CPU, network,...
+  - Node Manager: khởi tạo containers, báo cáo tài nguyên sử dụng về Scheduler.
+- Workflow:
+  - Client yêu cầu RM tạo 1 AM process
+  - Client submits job và RM sẽ tìm 1 Node Manager khởi chạy container để lưu trữ AM process(đại diện cho client job/application)
+  - Node Managers khác được khởi chạy containers hay mặt AM process để chạy tính toán phân tán (các nút được chọn để phân bổ vùng chứa mới càng gần dữ liệu đầu vào càng tốt)
 # 4. SPARK
