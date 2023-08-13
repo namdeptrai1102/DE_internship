@@ -48,14 +48,24 @@
     - Ứng dụng chạy vĩnh viễn.
   - Horizontal vs Vertical Scaling
     - Horizontal scaling (mở rộng chiều ngang): mở rộng quy mô bằng cách thêm nhiều máy hơn vào nhóm tài nguyên
-    - Vertical scaling (mở rộng chiều dọc): mở rộng quy mô bằng cách nâng cấp (CPU, RAM) vào máy hiện có
+    - Vertical scaling (mở rộng chiều dọc): mở rộng quy mô bằng cách nâng cấp (CPU, RAM) vào máy hiện có  
       ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/eb24c360-8f9c-4b2b-9251-759b66aa130a)
 - Scheduling:
-  - FIFO Scheduler: k phù hợp với shared cluster
+  - FIFO Scheduler: k phù hợp với shared cluster  
     ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/aafca7b5-6c08-497d-9f64-9b07117c0656)
-  - Capacity Scheduler: chia queue ra thành nhiều hàng đợi nhỏ hơn, công việc sẽ được chỉ định hàng đợi thông qua mapreduce.job.queuename, nếu ko thì vào default
+  - Capacity Scheduler: chia queue ra thành nhiều hàng đợi nhỏ hơn, công việc sẽ được chỉ định hàng đợi thông qua mapreduce.job.queuename, nếu ko thì vào default  
     ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/49333917-66a5-495d-8cc8-1dd57f6d7276)
-  - Fair Scheduler : tự động điều chỉnh cho công bằng các job 
+  - Fair Scheduler : tự động điều chỉnh cho công bằng các job  
     ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2d523254-5ac7-441c-82ce-17386b186d67)
 ## 3.2 Map Reduce
+### 3.2.1 Basic
+- MapReduce là một mô hình lập trình được sử dụng để xử lý các tập dữ liệu lớn trên 1 cluster bằng cách sử dụng thuật toán phân tán.
+- Nó là 1 hệ thống xử lý hàng loạt và không phù hợp để phân tích tương tác(truy vấn chậm)
+- Gồm 2 giai đoạn:
+  - Map phase: dùng 1 map function tạo một tập hợp các key/value trị trung gian.
+  - Reduce phase: hợp nhất tất cả các giá trị trung gian được liên kết với cùng một khóa trung gian.
+- Đặc điểm: phân tán (map task, reduce task -> nhiều hardware), Song song(reduce task), Chịu lỗi(khởi động lại khi lỗi), Scalable (Horizontally)
+- Nó cần được Serializable(cho viết và lưu trữ) and Comparable(cho giai đoạn map)
+### 3.2.2 Mapper
+- Lưu ý: sắp xếp dữ liệu diễn ra ở phía map, kphai phía reduce
 # 4. SPARK
