@@ -68,4 +68,13 @@
 - Nó cần được Serializable(cho viết và lưu trữ) and Comparable(cho giai đoạn map)
 ### 3.2.2 Mapper
 - Lưu ý: sắp xếp dữ liệu diễn ra ở phía map, kphai phía reduce
+- Giải thích code:
+  - Truyền vào 1 file text, chia nhỏ nó thành các words qua dấu “ “
+  - Xuất ra các cặp key/val, đc sắp xếp bởi reducers sau này
+  - Key là tên hãng xe, mỗi lần xuất hiện có val là 1
+  => Output là các cặp key (hãng xe) và value = 1, key được phép trùng nhau
+- Map task chạy trên 1 input split, ghi output vào 1 circular buffer (default 100MB), nếu bộ đệm đầy => 1 background thread cho vào 1 tệp tràn.
+- Output sẽ đc viết vào local disk của node đang chạy map (tạm thời, k viết trực tiếp vào hdfs), chú ý việc partition (phân vùng chỉ khi reducer >1).
+- K có gì đảm bảo một file text sẽ trong 1 block (> 128mb) => Input splits: nếu file đó viết 1 khối ko đủ => chỉ định khối tiếp theo để đọc (block đó có thể cùng node, cùng rack hoặc khác rack)
+### 3.2.3 Reducer
 # 4. SPARK
