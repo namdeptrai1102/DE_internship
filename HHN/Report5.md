@@ -25,7 +25,7 @@
     - Data Mart: tập con của data warehouse, phục vụ nhu cầu của một bộ phận cụ thể trong một tổ chức.
 # 2. HDFS
 # 3. YARN & Map Reduce
-## 3.1 YARN ( Yet Another Resource Negotiator)
+## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/06bb31f6-1d04-4a8e-8d41-fb97aae89409)
 - Responsibilities: 
@@ -46,4 +46,16 @@
     - 1 job mỗi application.
     - Nhiều job nỗi application: reused, dữ liệu giữa các công việc có thể được lưu vào bộ nhớ đệm.
     - Ứng dụng chạy vĩnh viễn.
+  - Horizontal vs Vertical Scaling
+    - Horizontal scaling (mở rộng chiều ngang): mở rộng quy mô bằng cách thêm nhiều máy hơn vào nhóm tài nguyên
+    - Vertical scaling (mở rộng chiều dọc): mở rộng quy mô bằng cách nâng cấp (CPU, RAM) vào máy hiện có
+      ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/eb24c360-8f9c-4b2b-9251-759b66aa130a)
+- Scheduling:
+  - FIFO Scheduler: k phù hợp với shared cluster
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/aafca7b5-6c08-497d-9f64-9b07117c0656)
+  - Capacity Scheduler: chia queue ra thành nhiều hàng đợi nhỏ hơn, công việc sẽ được chỉ định hàng đợi thông qua mapreduce.job.queuename, nếu ko thì vào default
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/49333917-66a5-495d-8cc8-1dd57f6d7276)
+  - Fair Scheduler : tự động điều chỉnh cho công bằng các job 
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2d523254-5ac7-441c-82ce-17386b186d67)
+## 3.2 Map Reduce
 # 4. SPARK
