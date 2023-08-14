@@ -59,6 +59,30 @@
   - Các replica sau sẽ đc đặt ngẫu nhiên trên các node nhưng k quá nhiều bản trên cùng 1 rack.
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5bbfb5b4-e0a1-42ad-b1f1-03f83239f58d)
 ## 2.5 Name node
+- Name node lưu trữ tất cả các metadata của file và thư mục trong cây
+- Chúng đc lưu trên local disk bởi 2 thực thể sau:
+  - Namespace Image File (FS Image): là một checkpoint system metadata tại 1 ID transaction cụ thể.
+  - Edit log: nhật ký thay đổi của metadata với lần gần nhất FS image 
+- Khi Namenode khởi chạy, nó chọn FS image và áp dụng edit log để nhận trạng thái mới nhất của metadata. Sau đó Namenode ghi 1 HDFS state mới vào FS image và bắt đầu hoạt động bth với 1 edit file trống.
+- Mỗi lần chạy Namenode đều phải thao tác vs edit log, edit log lớn sẽ khiến cho Namenode khởi động chậm => Cần Secondary Namenode
+- Secondary Namenode
+  - Kphai backup Namenode
+  - Kết hợp định kì edit log với FS image
+  - Giúp Namenode chính nhưng k thể thay thế nếu Namenode chính failure
+  - Thường chạy tại máy khác vì nó yêu cầu tài nguyên như Namenode chính
+  - Ko hdong nếu HDFS triển khai high availability (trình bày sau)
+- Namenode là single point of failure của HDFS: chết là sụp đổ cả hệ thống => giải pháp:
+  -  Backup image file và edit log
+  -  Secondary namenode: duy trì bản copy FS image nhưng bị delay time => vẫn mất data
+  -  Standby namenode (trình bày sau)
+- Hạn chế: lưu trữ trong memory nên sẽ bị limit dung lượng hdfs phụ thuộc vào name node memory 
+
+
+
+
+
+
+
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
