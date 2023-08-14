@@ -24,7 +24,23 @@
     - Data Lake: lưu trữ dữ liệu thô, không có cấu trúc và có cấu trúc, thuộc mọi loại, kích thước và định dạng ở định dạng gốc (> data warehouse).
     - Data Mart: tập con của data warehouse, phục vụ nhu cầu của một bộ phận cụ thể trong một tổ chức.
 # 2. HDFS
-
+## 2.1 File system
+- OS file system : Apple’s MacOS dùng APFS(Apple File System), thay thế hệ thống trc đó là HFS+. Windows hỗ trợ FAT, các biến thể của FAT và NTFS file systems, còn Linux hỗ trợ EXT family of file systems.
+- Distributed file systems: sử dụng network, truy cập nhiều node.
+- Disk block: đơn vị nhỏ nhất cho đọc ghi 
+- Metadata: owner, security access controls, ngày thay đổi gần nhất, ngày tạo, size (được lưu trong i-node). 
+- i-node : lưu metadata , chứa thông tin địa chỉ vật lí này lưu data gì (map physical -> logical)
+## 2.2 The big picture
+- Mục tiêu của HDFS: lưu trữ file lớn, streaming data acess(tối ưu ghi một đọc nhiều), chạy trên hardware giá rẻ.
+- 2 software daemons tạo ra HDFS:
+  - Name node (stores metadata): theo dõi tất cả dữ liệu được lưu trữ trên HDFS, kiểm soát access của máy khách vào tệp. Lưu trữ trên memory => limit của hdfs phụ thuộc vào memory của name node.
+  - Data node (stores acture data): giữ actural bytes tạo nên 1 file đc lưu trữ trong HDFS.
+- Data-locality: node chạy map reduce muốn tối thiểu hóa network transfer cần ở gần data cần tới
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/77de0bf2-708f-41e9-87ff-ef6122ac7970)
+## 2.3 HDFS block
+- Các filesystem nằm bên trên physical disk, hoạt động trên 1 mức trừu tượng gọi là filesystem block thay vì làm vc trực tiếp với các disk blocks (sự phức tạp được che giấu vs ng dùng filesystem).
+- HDFS kphai 1 filesystem vật lý, nó là một sự trừu tượng hóa ảo trên các hệ thống tệp dựa trên đĩa phân tán.
+- Trong HDFS, file có thể lớn hơn bất kì disk nào trong cụm. Default block size là 128MB
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
