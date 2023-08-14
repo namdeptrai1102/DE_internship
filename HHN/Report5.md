@@ -24,6 +24,7 @@
     - Data Lake: lưu trữ dữ liệu thô, không có cấu trúc và có cấu trúc, thuộc mọi loại, kích thước và định dạng ở định dạng gốc (> data warehouse).
     - Data Mart: tập con của data warehouse, phục vụ nhu cầu của một bộ phận cụ thể trong một tổ chức.
 # 2. HDFS
+
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
@@ -108,5 +109,4 @@
 - AM failure: RM nghe heartbeat và khởi động lại AM nại Node Manager khác 
 - Node Manager failure: RM nghe heartbeat và restart lại AM mà đã chạy trên node đó
 - RM failure: HA Zookeeper (tìm hiểu sau)
-
 # 4. SPARK
