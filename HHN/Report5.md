@@ -76,11 +76,26 @@
   -  Secondary namenode: duy trì bản copy FS image nhưng bị delay time => vẫn mất data
   -  Standby namenode (trình bày sau)
 - Hạn chế: lưu trữ trong memory nên sẽ bị limit dung lượng hdfs phụ thuộc vào name node memory 
-
-
-
-
-
+## 2.6 Datanode
+- Datanode lưu trữ data blocks trong local filesystem và gửi block report cho Namenode
+- Dữ liệu của HDFS đc lưu trữ trong thư mục đc chỉ định (cài đặtt cấu hình dfs.datanode.data.dir, default là ${hadoop.tmp.dir}/dfs/data)
+## 2.7 Đọc ghi trong HDFS
+- Ghi:
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/753d33c9-01e5-4e2b-8c70-de4a6c2b3899)
+  - Client ghi đệm data trên đĩa cục bộ, đợi cho đến khi có đủ dữ liệu để tạo thành 1 data-block HDFS trước khi liên hệ với Namenode để yêu cầu lưu trữ dữ liệu này.
+  - Sau khi liên hệ vs client, Namenode check các quyền cần thiết, trả về client dsach các DataNode để ghi vào.
+  - Client bắt đầu ghi vào Datanode
+  - Datanode nhận dữ liệu theo từng phần, ghi vào local repository rồi chuyển phần đó sang Datanode tiếp theo trong dsach
+  - 1 data pipeline hình thành từ client đến tất cả các Datanodes, 1 Datanode có thể đồng thởi nhận và truyền data.
+- Đọc:
+ ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/dd7148be-bf14-41d1-a23c-6fae109822e1)
+  - Client gọi RPC (lời gọi thủ tục từ xa) cho Namenode để nhận về vị trí các block chứa file mà client muốn đọc
+  - Namenode trả về list địa chỉ Datanode cần đọc, đc xếp theo độ gần vs client. Nếu client nằm trên node chứa data nó cần thì sẽ đọc locally.
+  - Với ng dùng, ứng dụng client đọc như 1 luồng liên tục.
+  - Lỗi => tự động chuyển thằng datanode khác, sẽ k quay lại node này nữa. Ktra lỗi bằng check sum, nếu sai nó sẽ báo cho Namenode để xử lí.
+  - Lưu ý: Namenode chỉ có tác dụng xử lí request cung cấp data node location. Dữ liệu sẽ k dc truyền qua name node mà client đọc trực tiếp từ data node để tránh bottleneck.
+## 2.8 High Availability
+## 2.9 Distcp
 
 
 # 3. YARN & Map Reduce
