@@ -40,7 +40,17 @@
 ## 2.3 HDFS block
 - Các filesystem nằm bên trên physical disk, hoạt động trên 1 mức trừu tượng gọi là filesystem block thay vì làm vc trực tiếp với các disk blocks (sự phức tạp được che giấu vs ng dùng filesystem).
 - HDFS kphai 1 filesystem vật lý, nó là một sự trừu tượng hóa ảo trên các hệ thống tệp dựa trên đĩa phân tán.
-- Trong HDFS, file có thể lớn hơn bất kì disk nào trong cụm. Default block size là 128MB
+- Trong HDFS, file có thể lớn hơn bất kì disk nào trong cụm. Default block size là 128MB, đây là đơn vị nhỏ nhất để THAM CHIẾU (đọc/ghi)  mà name node có thể tham chiếu tới.
+  - VD muốn lưu file 10MB thì cũng chỉ mất 10MB ổ đĩa chứ k phải 128MB
+  - 128 mb k  phải là một đơn vị lưu trữ mà là một đơn vị để lưu vị trí của nó trong metadata của name node, tức là namenode sẽ lưu thông tin data dang ở block nào chứ k lưu cụ thể hơn.
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/99788114-f295-4da2-b850-4935f0832131)
+- Mỗi block có thể replication 
+- Large block size:
+  - Giảm áp lực cho namenode phải lưu trữ thông tin, các file mang tính sequence hoặc file nén (HAR) nằm liền kề nhau đc gộp thành một tệp HAR chiếm một khối HDFS duy nhất trong bộ nhớ.
+  - Giảm thời gian tìm kiếm: Các filesystem blocks xuất hiện liên tục trên đĩa vật lý.
+  - Cải thiện tốc độ mạng: mỗi block đc truyền trên 1 kết nối TCP, HDFS có thể duy trì kết nối TCP liên tục với Datanode và giảm chi phí mạng. Nhiều block lớn thì số lượng block sẽ ít => Name node ít đc yêu cầu hơn => ít lưu lượng truy cập mạng => ít kết nối TCP liên tục.
+  - Tăng tốc độ Map Reduce: khối quá nhỏ => quá  nhiều mapper với ít hoạt động, tốn chi phí quản lý, khối cx k nên quá lớn => quá ít mapper, tốn tgian chạy
+- Hdfs k đọc ghi song song 
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
