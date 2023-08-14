@@ -50,7 +50,15 @@
   - Giảm thời gian tìm kiếm: Các filesystem blocks xuất hiện liên tục trên đĩa vật lý.
   - Cải thiện tốc độ mạng: mỗi block đc truyền trên 1 kết nối TCP, HDFS có thể duy trì kết nối TCP liên tục với Datanode và giảm chi phí mạng. Nhiều block lớn thì số lượng block sẽ ít => Name node ít đc yêu cầu hơn => ít lưu lượng truy cập mạng => ít kết nối TCP liên tục.
   - Tăng tốc độ Map Reduce: khối quá nhỏ => quá  nhiều mapper với ít hoạt động, tốn chi phí quản lý, khối cx k nên quá lớn => quá ít mapper, tốn tgian chạy
-- Hdfs k đọc ghi song song 
+- Hdfs k đọc ghi song song
+## 2.4 Block Replication
+- Fault tolerant là một dạng dự phòng phần cứng đầy đủ
+- Trên thực tế:
+  - Replica đầu tiên đc đặt trên cùng node vs client
+  - Replica thứ 2 đc đặt ngẫu nhiên ở 1 rack khác, replica thứ 3 cũng đc đặt ngẫu nhiên trên rack này
+  - Các replica sau sẽ đc đặt ngẫu nhiên trên các node nhưng k quá nhiều bản trên cùng 1 rack.
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5bbfb5b4-e0a1-42ad-b1f1-03f83239f58d)
+## 2.5 Name node
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
