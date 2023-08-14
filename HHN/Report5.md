@@ -67,14 +67,46 @@
 - Đặc điểm: phân tán (map task, reduce task -> nhiều hardware), Song song(reduce task), Chịu lỗi(khởi động lại khi lỗi), Scalable (Horizontally)
 - Nó cần được Serializable(cho viết và lưu trữ) and Comparable(cho giai đoạn map)
 ### 3.2.2 Mapper
-- Lưu ý: sắp xếp dữ liệu diễn ra ở phía map, kphai phía reduce
 - Giải thích code:
   - Truyền vào 1 file text, chia nhỏ nó thành các words qua dấu “ “
   - Xuất ra các cặp key/val, đc sắp xếp bởi reducers sau này
   - Key là tên hãng xe, mỗi lần xuất hiện có val là 1
   => Output là các cặp key (hãng xe) và value = 1, key được phép trùng nhau
+- Lưu ý: sắp xếp dữ liệu diễn ra ở phía map, kphai phía reduce
 - Map task chạy trên 1 input split, ghi output vào 1 circular buffer (default 100MB), nếu bộ đệm đầy => 1 background thread cho vào 1 tệp tràn.
 - Output sẽ đc viết vào local disk của node đang chạy map (tạm thời, k viết trực tiếp vào hdfs), chú ý việc partition (phân vùng chỉ khi reducer >1).
 - K có gì đảm bảo một file text sẽ trong 1 block (> 128mb) => Input splits: nếu file đó viết 1 khối ko đủ => chỉ định khối tiếp theo để đọc (block đó có thể cùng node, cùng rack hoặc khác rack)
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/d1a594ba-690e-4225-b81a-bb77adb0861b)
 ### 3.2.3 Reducer
+- Mỗi map task có 1 phân vùng dữ liệu đc sắp xếp cho mỗi reducer, data đc copy sang reducer đích qua HTTP.
+- Reducer k đợi tất cả map tasks hoàn thành mà copy song song từ những map tasks đã hoàn thành.
+- Data đc sắp xếp và hợp nhất bởi các mappers trc khi chuyển cho reducer
+- Reduction function được gọi cho mỗi key và danh sách value của nó. Một reduce task sẽ gộp tất cả các giá trị được liên kết với một khóa nhất định.
+- Lưu ý: tất cả các bản ghi cho một khóa nhất định nằm trong một phân vùng duy nhất => một reduce task duy nhất xử lý tất cả dữ liệu cho một khóa nhất định.
+ ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/47fd6aad-4f90-4b0b-8d7f-ec8f08ba4760)
+### 3.2.4 Combinator and Partitioner
+- Combiner: một action cho đầu ra của mapper, giảm thiểu lưu lượng dữ liệu cần truyền từ Mapper đến Reducer bằng cách tổng hợp các giá trị trung gian tương tự với nhau, thực hiện các phép tính đơn giản, có thể bị tắt hoặc thực thi tùy cấu hình.
+- Partitioner: cấu hình cụ thể partion nào chứa data nào.
+### 3.2.5 Tổng hợp
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/185f9584-2ed2-4705-81e3-5e6a56ce79f4)
+1. Job được submit qua waitForCompletion()
+2. class JobSubmitter trao đổi vs RM, lấy application ID và check path
+3. Copy job resources theo application ID
+4. Job đc thực thi tới RM bằng cách gọi phg thức submitApplication() trên RM.
+5. ApplicationMaster quản lý vòng đời của 1 job, trong MapReduce thì AM là MRAppMaster
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/49e74179-2714-40af-bc01-8d9a6dad616f)
+6. AM khởi tạo một số book-keeping object để theo dõi các task mapper và reducer
+7. Nếu job có thể chạy hoàn toàn trên node đó thì là uber job
+8. Nếu không sẽ yêu cầu RM allocate thêm. Reducer chạy ở đâu cx được nhưng mapper thì nên chạy ở các node có data locally (các input splits: cùng node, cùng rack hoặc khác rack)
+9. Chạy MapReduce
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f3611c9e-687f-446b-913f-5345455a9b70)
+10. Có thể sử dụng các định dạng đầu ra khác ngoài file.
+11. Báo cáo tiến trình cho AM, client có thể theo dõi qua UI.
+12. Kết thúc, kết quả đc in lên bảng điều khiển, dọn dẹp trạng thái và xóa các output trung gian
+### 3.2.6 Resiliency (phục hồi)
+- Task failure: báo lại cho AM => chỉ định rescheduling lại task đó 
+- AM failure: RM nghe heartbeat và khởi động lại AM nại Node Manager khác 
+- Node Manager failure: RM nghe heartbeat và restart lại AM mà đã chạy trên node đó
+- RM failure: HA Zookeeper (tìm hiểu sau)
+
 # 4. SPARK
