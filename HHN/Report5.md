@@ -183,3 +183,9 @@
 - Node Manager failure: RM nghe heartbeat và restart lại AM mà đã chạy trên node đó
 - RM failure: HA Zookeeper (tìm hiểu sau)
 # 4. SPARK
+- 1 nền tảng phổ cập về xử lí dữ liệu, vượt trội hơn so với MapReduce:
+  - Job lặp đi lặp lại sẽ k tốn time I/O
+  - Hỗ trợ analysis truy vấn hiệu quả (Hive hoặc Pig)
+  - Cung cấp nhiều api
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5571b493-584d-4aea-901b-87576642e613)
+  [2 Trường hợp đầu: sử dụng các kỹ thuật lưu trữ tạm thời hoặc tối ưu hóa cách thực hiện các truy vấn để tránh phải đọc dữ liệu cùng một từ đĩa nhiều lần]
