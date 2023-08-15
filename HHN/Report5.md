@@ -201,3 +201,39 @@
   - Built-in standalone cluster manager: chỉ có các thành phần cụ thể của Spark, không phụ thuộc vào các thành phần Hadoop và trình điều khiển Spark đóng vai trò là trình quản lý cụm (tự nó có bộ quản lý phân tán của chính nó)
   - Kubernetes
   - Local mode: toàn bộ ứng dụng Spark chạy trên local jvm 
+- Execution modes:
+  - Cluster mode: 
+    - User submits a spark application tới cluster manager
+    - Manager sinh ra tiến trình driver và executor để thực thi job
+    - Cả driver và executor đều trong 1 cluster
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/58ba2e16-ebc2-4733-a06e-45291f36d8e3)
+  - Client mode:
+    - Gần giống với cluster mode, khác là driver process và  executor process k đc đặt trên cùng 1 cluster.
+    - Máy client duy trì driver process, cluster chịu trách nhiệm duy trì executor process.
+    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/0a178e33-e83c-4285-8021-cd53d6592a7c)
+## 4.3 Spark Application Life Cycle:
+  1. User submit Spark job cho cluster (nếu cluster management là YARN thì client sẽ kết nối với RM, nếu đc accept thì RM sẽ tạo 1 Spark driver process trong cluster)
+  2. Thiết lập 1 SparkSession (điểm truy cập duy nhất để tương tác với Spark), nó sẽ giao tiếp vs cluster manager daemon (RM) để khởi chạy executor processes.
+  3. RM chạy executor processes trên các node và trả về location cho diver process(RM chạy executer xong sẽ giao quyền lại cho driver điều khiển các executer)
+  4. Driver giao task cho executer và excuter báo cáo trạng thái lại cho driver
+  5. Diver thoát khi các Spark job hoàn thành => RM tắt các executor processes
+## 4.4 Spark API
+- Bao gồm RDD ở mức phi cấu trúc cấp thấp, DataFrames và Datasets ở mức cấu trúc cấp cao.
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/a277456d-4d1c-4409-9d42-3f0aea3e5499)
+### 4.4.1 RDD (Resilient Distributed Datasets)
+- Read-only (bất biến)
+- Đc phân vùng trên cụm, có thể vận hành song song và có thể khôi phục nếu một node bị falure
+-  Ko khuyến khích dùng
+-  Gthich tên:
+  - Resilient: có khả năng chịu lỗi, tự tìm lại đc cách tính toán những phân vùng bị mất
+  - Distributed: hoạt động trên cluster
+  - Datasets: đa dạng nguồn data như json, csv, text, database 
+- Có thể dùng cache cho cviec lặp lại, hỗ trợ phân vùng thủ công
+- RDD là bất biến => Transformations cho phép dùng RDD để tạo ra 1 RDD mới (chúng sẽ k đc thực thi cho đến khi một hành động được thực hiện)
+- RDD theo dõi transformation của nó bằng đồ thị phụ thuộc, giúp ta biết đc những transformation nào phải đc thực thi sau khi 1 hdong đc gọi.
+- Mỗi RDD có 1 số thuộc tính như sau:
+  - List các phân vùng
+  - Function tính toán mỗi phân vùng
+  - List phụ thuộc vào các RDD khác
+  - Phân vùng tùy chọn cho RDD key-value (nếu cầu quản lý việc phân phối dữ liệu dựa trên các khóa).
+  - List tùy chọn các vị trí ưu tiên tính toán phân vùng (tính toán trên các máy gần với dữ liệu giúp tối ưu hóa hiệu suất)
