@@ -183,9 +183,21 @@
 - Node Manager failure: RM nghe heartbeat và restart lại AM mà đã chạy trên node đó
 - RM failure: HA Zookeeper (tìm hiểu sau)
 # 4. SPARK
+## 4.1 Intro
 - 1 nền tảng phổ cập về xử lí dữ liệu, vượt trội hơn so với MapReduce:
   - Job lặp đi lặp lại sẽ k tốn time I/O
   - Hỗ trợ analysis truy vấn hiệu quả (Hive hoặc Pig)
   - Cung cấp nhiều api
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5571b493-584d-4aea-901b-87576642e613)
-  [2 Trường hợp đầu: sử dụng các kỹ thuật lưu trữ tạm thời hoặc tối ưu hóa cách thực hiện các truy vấn để tránh phải đọc dữ liệu cùng một từ đĩa nhiều lần]
+  [2 trường hợp đầu: sử dụng các kỹ thuật lưu trữ tạm thời hoặc tối ưu hóa cách thực hiện các truy vấn để tránh phải đọc dữ liệu cùng một từ đĩa nhiều lần]
+## 4.2 Architecture 
+- Spark có nhiều điểm tương đồng với MapReduce, gồm 2 tiến trình là tiến trình điều phối và tiến trình phụ là:
+  - Driver: quản lý
+  - Executor: thực thi job được driver chỉ định và gửi lại trạng thái
+   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/00e193e8-02b9-4beb-b201-ae9d563b1d45)
+- Spark tương thích với 1 số quy trình quản lý cụm:
+  - Hadoop YARN: ‘HADOOP_CONF_DIR’ đc cài đặt trong file spark-env.sh (xác định đường dẫn đến thư mục chứa các tệp cấu hình của Hadoop)
+  - Apache Mesos
+  - Built-in standalone cluster manager: chỉ có các thành phần cụ thể của Spark, không phụ thuộc vào các thành phần Hadoop và trình điều khiển Spark đóng vai trò là trình quản lý cụm (tự nó có bộ quản lý phân tán của chính nó)
+  - Kubernetes
+  - Local mode: toàn bộ ứng dụng Spark chạy trên local jvm 
