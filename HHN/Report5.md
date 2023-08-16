@@ -7,7 +7,7 @@
 - DataBase: SQL và NoSQL (đã trình bày ở báo cáo trước đó)
 - Big Data Defined:
   - Volume: Khối lượng dữ liệu
-  - Velocity: Tốc độ truy cập và sử dụng dữ liệu
+  - Velocity: Tốc độ sản sinh dữ liệu
   - Variety: đa dạng nguồn dữ liệu  
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/be57e369-61ed-4a0a-9b2a-032cf4d32fab)
   - Hiện nay có thêm 4 đặc trưng khác: Veracity(xác thực), Value(giá trị, lợi ích), Visualization, Variability(khả năng thay đổi) 
