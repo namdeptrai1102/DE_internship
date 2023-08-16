@@ -237,3 +237,22 @@
   - List phụ thuộc vào các RDD khác
   - Phân vùng tùy chọn cho RDD key-value (nếu cầu quản lý việc phân phối dữ liệu dựa trên các khóa).
   - List tùy chọn các vị trí ưu tiên tính toán phân vùng (tính toán trên các máy gần với dữ liệu giúp tối ưu hóa hiệu suất)
+### 4.4.2 DataFrames
+- Tương tự như các bảng đc phân phối với hàng và cột đc xác định, mỗi cột là 1 kiểu dữ liệu.
+- Đc chia nhỏ thành các partition (mỗi partition là 1 collection of rows,  đại diện cho phân phối vật lý của dữ liệu trên cluster), số partition quyết định mức độ song song.
+- Schema: định nghĩa column type
+- Catalyst: convert kiểu dlieu của các ngôn ngữ sang  kiểu tương đương của Catalsyt => duy trì type information
+### 4.4.3 DataSets
+- Tập hợp đối tượng có strongly-typed, bất biến ánh xạ tới 1 relational schema và có cấu trúc.
+- Ko hỗ trợ R và Python, DataSets thay thế cho RDD vì sự tối ưu của mình.
+- DataSets đc tạo nhờ encoder (ánh xạ các kiểu dữ liệu biểu diễn ra kiểu tương ứng của Spark)
+- So sánh vs DataFrame: 
+  - DataSet check type lúc compile còn DataFrame quan tâm type lúc runtime.
+  - DataFrame dc coi như DataSet với type row 
+- Lợi ích của DataSet so vs DataFrame:
+  - Một số phép toán chỉ có thể được thực hiện bằng Datasets
+  - Type-safety (đảm bảo hợp lệ kiểu dữ liệu)
+  - Cung cấp gợi ý tự động và các thông báo hữu ích
+  - Xử lý cả phân tán lẫn cục bộ
+## 4.5 Spark Applications
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4d403ab3-ee64-4b05-8481-337bca32f503)
