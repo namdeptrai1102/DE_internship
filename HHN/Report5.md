@@ -256,3 +256,19 @@
   - Xử lý cả phân tán lẫn cục bộ
 ## 4.5 Spark Applications
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4d403ab3-ee64-4b05-8481-337bca32f503)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/99fc3112-1427-422e-9107-ed0b13184333)
+- Job được tạo thành từ một biểu đồ tuần hoàn có hướng của các states.
+- Mỗi state tương đương vs map phase hoặc reduce phase trong MapReduce.
+- State chia thành các task và chạy song song trên các partition của RDD trên cluster (mỗi task là 1 partition), task là sự kết hợp của datablock và transformation.
+- RDD bất biến nhưng có thể tạo mới bằng transformation cái hiện tại:
+  - Narrow transformation (1-1): 1 input partition chỉ cho ra 1 output partition (k yêu cầu shuffled)
+  - Wide transformation (1-nhiều): những input partitions đóng góp ra 1 số output partition (shuffled chính là vs Spark trao đổi các phân vùng trên cluster)
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4780bc32-75d6-40f0-a757-a4448ac9225e)
+- Shuffle map task:
+  - Spark trao đổi để phân vùng lại, ghi output ra đĩa
+  - Chạy trong mọi state trừ final state
+  - Có thể dùng lại các shuffle từ cviec trc đó thay vì tính toán lại
+- Result task: các tasks chạy song song trên RĐ rồi gửi kqua lại driver => kết quả cuối cùng
+- 2 tính năng Spark khác MapReduce:
+  - Pipelining: mọi hoạt động k yêu cầu di chuyển data qua các node => thu thành 1 giai đoạn, thực hiện tốt đa các bước r mới lưu vào đĩa (ko lưu trung gian)
+  - Shuffle persistence: lưu trữ tạm thời các dữ liệu sau khi quá trình shuffle đã hoàn thành, để có thể tối ưu hóa lại việc sử dụng chúng trong các công việc sau này và giảm tối đa việc di chuyển dữ liệu qua mạng.
