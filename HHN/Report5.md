@@ -200,7 +200,8 @@
   - Apache Mesos
   - Built-in standalone cluster manager: chỉ có các thành phần cụ thể của Spark, không phụ thuộc vào các thành phần Hadoop và trình điều khiển Spark đóng vai trò là trình quản lý cụm (tự nó có bộ quản lý phân tán của chính nó)
   - Kubernetes
-  - Local mode: toàn bộ ứng dụng Spark chạy trên local jvm 
+  - Local mode: toàn bộ ứng dụng Spark chạy trên local jvm
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b15703ff-1396-4f4a-a205-619ee4d4e30f)
 - Execution modes:
   - Cluster mode: 
     - User submits a spark application tới cluster manager
