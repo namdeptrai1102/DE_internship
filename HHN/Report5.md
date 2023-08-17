@@ -194,7 +194,7 @@
 - Spark có nhiều điểm tương đồng với MapReduce, gồm 2 tiến trình là tiến trình điều phối và tiến trình phụ là:
   - Driver: quản lý
   - Executor: thực thi job được driver chỉ định và gửi lại trạng thái
-   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/00e193e8-02b9-4beb-b201-ae9d563b1d45)
+   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/44e04522-7426-4641-95dd-159ae3d24e51)
 - Spark tương thích với 1 số quy trình quản lý cụm:
   - Hadoop YARN: ‘HADOOP_CONF_DIR’ đc cài đặt trong file spark-env.sh (xác định đường dẫn đến thư mục chứa các tệp cấu hình của Hadoop)
   - Apache Mesos
