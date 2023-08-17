@@ -272,3 +272,12 @@
 - 2 tính năng Spark khác MapReduce:
   - Pipelining: mọi hoạt động k yêu cầu di chuyển data qua các node => thu thành 1 giai đoạn, thực hiện tốt đa các bước r mới lưu vào đĩa (ko lưu trung gian)
   - Shuffle persistence: lưu trữ tạm thời các dữ liệu sau khi quá trình shuffle đã hoàn thành, để có thể tối ưu hóa lại việc sử dụng chúng trong các công việc sau này và giảm tối đa việc di chuyển dữ liệu qua mạng.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c1a65d88-d008-4bc0-92c9-49adfe3f5fe2)
+- Scheduler:
+  - DAG (directed acyclic graph) Scheduler: chia công việc thành một biểu đồ tuần hoàn có hướng của các state
+  - Task Scheduler: nhận list các tasks và khớp chúng với các executors đang chạy cho ứng dụng. Đô ưu tiên:
+    - Process-local tasks
+    - Node-local tasks
+    - Rack-local tasks
+    - Arbitrary nonlocal tasks
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/24067816-9577-4c97-8850-400f2d7e0b46)
