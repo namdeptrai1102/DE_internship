@@ -98,6 +98,7 @@
 - JournalNodes lưu giữ bản ghi về tất cả các thay đổi mà Namenode đang hoạt động thực hiện trên không gian tên của nó (cần 1 cụm JournalNode vì nó dễ bị hỏng)
 - Số lỗi chịu được với N JournalNode là [(N-1)/2]
 - Khi active NamNode brought down thì thằng standby sẽ đọc từ cụm JournalNode
+- Namenode được ping để kiểm tra tình trạng và báo cáo bất kỳ lỗi nào cho Zookeeper
 - Datanode gửi report và heartbeat tới cả active NameNode standby NameNode. 
 - Chú ý: chỉ cho một thằng ghi (vì một lý do nào đó mà thằng standby nghĩ là thằng chính đã chết và ghi vào cụm ) => lỗi 
 - Cách khác: chia sẻ NFS (Network File System)
