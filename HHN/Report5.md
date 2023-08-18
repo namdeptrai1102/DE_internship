@@ -103,9 +103,6 @@
 - Cách khác: chia sẻ NFS (Network File System)
   - Active Namenode ghi lại bất kỳ sửa đổi nào trong namespace của nó trong log file vào 1 thư mục NFS dùng chung
   - Các standby NameNode liên tục theo dỗi và cập nhật theo NFS đó
-## 2.9 Distcp
-
-
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
