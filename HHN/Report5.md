@@ -287,3 +287,20 @@
     - Rack-local tasks
     - Arbitrary nonlocal tasks  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/24067816-9577-4c97-8850-400f2d7e0b46)  
+# 5. ZooKeeper
+- ZooKeeper là một dịch vụ tập trung để duy trì thông tin cấu hình, đặt tên, cung cấp các dịch vụ nhóm và đồng bộ hóa phân tán.
+- Có thể chạy cả standalone mode và ensemble (cập nhật theo số đông VD 3 trên 5)
+- Hierarchical (thứ bậc):
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/38877c83-162b-4f14-ac38-00c754bc2290)
+- Zab: đầu tiên chọn leader, còn lại là follower gửi yêu cầu cập nhật tới leader -> broadcast to all, khi phần đông dc cập nhật thì dừng. Nếu leader chết -> bầu lại, chết xong sống lại thì lại join như follower
+- Data model: 
+  - znode liên kết tới ACL(access control list) để đọc ghi(atomic) 
+  - Sequential znodes (đc đánh số thứ tự bởi nút cha => truy xuất 1 node theo index)
+  - Đặt watcher lên các znode để thông báo khi node đó bị thay đổi
+- Consistency (tính nhất quán): mỗi sự thay đổi znode được chỉ định vào một ID duy nhất toàn cầu (Zookeeper transaction ID- zxid) VD: zxid A<B thì A xảy ra trước B 
+  - Tính nhất quán tuần tự: một khi có ng đổi znode thì mọi ng khác sẽ thấy đc sự thay đổi 
+  - Atomic:  Sửa đổi thành công hoặc thất bại. Không có thành công hoặc thất bại một phần 
+  - Single system image: một node rời khỏi 1 ensemble failed và mong muốn kết nối 1 ensemble khác thì nó sẽ từ chối tới khi ensemble khác đó được update mới nhất.
+  - Durability (độ bền): Sau khi cập nhật thành công, nó sẽ được duy trì.
+  - Timeliness (kịp thời): hệ thống đảm bảo client xem được cập nhật sau khoàng tgian nhất định
+- Zookeeper k hỗ trợ nhiều máy nhất quán đồng thời, VD client có thể đọc 1 giá trị cũ vì chưa kịp cập nhật => client cần sync (1 phần của Zookeeper API)
