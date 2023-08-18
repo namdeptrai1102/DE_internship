@@ -95,6 +95,14 @@
   - Lỗi => tự động chuyển thằng datanode khác, sẽ k quay lại node này nữa. Ktra lỗi bằng check sum, nếu sai nó sẽ báo cho Namenode để xử lí.
   - Lưu ý: Namenode chỉ có tác dụng xử lí request cung cấp data node location. Dữ liệu sẽ k dc truyền qua name node mà client đọc trực tiếp từ data node để tránh bottleneck.
 ## 2.8 High Availability
+- JournalNodes lưu giữ bản ghi về tất cả các thay đổi mà Namenode đang hoạt động thực hiện trên không gian tên của nó (cần 1 cụm JournalNode vì nó dễ bị hỏng)
+- Số lỗi chịu được với N JournalNode là [(N-1)/2]
+- Khi active NamNode brought down thì thằng standby sẽ đọc từ cụm JournalNode
+- Datanode gửi report và heartbeat tới cả active NameNode standby NameNode. 
+- Chú ý: chỉ cho một thằng ghi (vì một lý do nào đó mà thằng standby nghĩ là thằng chính đã chết và ghi vào cụm ) => lỗi 
+- Cách khác: chia sẻ NFS (Network File System)
+  - Active Namenode ghi lại bất kỳ sửa đổi nào trong namespace của nó trong log file vào 1 thư mục NFS dùng chung
+  - Các standby NameNode liên tục theo dỗi và cập nhật theo NFS đó
 ## 2.9 Distcp
 
 
@@ -187,30 +195,30 @@
 - 1 nền tảng phổ cập về xử lí dữ liệu, vượt trội hơn so với MapReduce:
   - Job lặp đi lặp lại sẽ k tốn time I/O
   - Hỗ trợ analysis truy vấn hiệu quả (Hive hoặc Pig)
-  - Cung cấp nhiều api
-  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5571b493-584d-4aea-901b-87576642e613)
+  - Cung cấp nhiều api  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5571b493-584d-4aea-901b-87576642e613)  
   [2 trường hợp đầu: sử dụng các kỹ thuật lưu trữ tạm thời hoặc tối ưu hóa cách thực hiện các truy vấn để tránh phải đọc dữ liệu cùng một từ đĩa nhiều lần]
 ## 4.2 Architecture 
 - Spark có nhiều điểm tương đồng với MapReduce, gồm 2 tiến trình là tiến trình điều phối và tiến trình phụ là:
-  - Driver: quản lý
-  - Executor: thực thi job được driver chỉ định và gửi lại trạng thái
+  - Driver: quản lý 
+  - Executor: thực thi job được driver chỉ định và gửi lại trạng thái  
    ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/44e04522-7426-4641-95dd-159ae3d24e51)
 - Spark tương thích với 1 số quy trình quản lý cụm:
   - Hadoop YARN: ‘HADOOP_CONF_DIR’ đc cài đặt trong file spark-env.sh (xác định đường dẫn đến thư mục chứa các tệp cấu hình của Hadoop)
   - Apache Mesos
   - Built-in standalone cluster manager: chỉ có các thành phần cụ thể của Spark, không phụ thuộc vào các thành phần Hadoop và trình điều khiển Spark đóng vai trò là trình quản lý cụm (tự nó có bộ quản lý phân tán của chính nó)
   - Kubernetes
-  - Local mode: toàn bộ ứng dụng Spark chạy trên local jvm
+  - Local mode: toàn bộ ứng dụng Spark chạy trên local jvm  
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b15703ff-1396-4f4a-a205-619ee4d4e30f)
 - Execution modes:
   - Cluster mode: 
     - User submits a spark application tới cluster manager
     - Manager sinh ra tiến trình driver và executor để thực thi job
-    - Cả driver và executor đều trong 1 cluster
+    - Cả driver và executor đều trong 1 cluster  
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/58ba2e16-ebc2-4733-a06e-45291f36d8e3)
   - Client mode:
     - Gần giống với cluster mode, khác là driver process và  executor process k đc đặt trên cùng 1 cluster.
-    - Máy client duy trì driver process, cluster chịu trách nhiệm duy trì executor process.
+    - Máy client duy trì driver process, cluster chịu trách nhiệm duy trì executor process.  
     ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/0a178e33-e83c-4285-8021-cd53d6592a7c)
 ## 4.3 Spark Application Life Cycle:
   1. User submit Spark job cho cluster (nếu cluster management là YARN thì client sẽ kết nối với RM, nếu đc accept thì RM sẽ tạo 1 Spark driver process trong cluster)
@@ -219,7 +227,7 @@
   4. Driver giao task cho executer và excuter báo cáo trạng thái lại cho driver
   5. Diver thoát khi các Spark job hoàn thành => RM tắt các executor processes
 ## 4.4 Spark API
-- Bao gồm RDD ở mức phi cấu trúc cấp thấp, DataFrames và Datasets ở mức cấu trúc cấp cao.
+- Bao gồm RDD ở mức phi cấu trúc cấp thấp, DataFrames và Datasets ở mức cấu trúc cấp cao.  
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/a277456d-4d1c-4409-9d42-3f0aea3e5499)
 ### 4.4.1 RDD (Resilient Distributed Datasets)
 - Read-only (bất biến)
@@ -255,7 +263,7 @@
   - Type-safety (đảm bảo hợp lệ kiểu dữ liệu)
   - Cung cấp gợi ý tự động và các thông báo hữu ích
   - Xử lý cả phân tán lẫn cục bộ
-## 4.5 Spark Applications
+## 4.5 Spark Applications  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4d403ab3-ee64-4b05-8481-337bca32f503)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/99fc3112-1427-422e-9107-ed0b13184333)
 - Job được tạo thành từ một biểu đồ tuần hoàn có hướng của các states.
@@ -263,7 +271,7 @@
 - State chia thành các task và chạy song song trên các partition của RDD trên cluster (mỗi task là 1 partition), task là sự kết hợp của datablock và transformation.
 - RDD bất biến nhưng có thể tạo mới bằng transformation cái hiện tại:
   - Narrow transformation (1-1): 1 input partition chỉ cho ra 1 output partition (k yêu cầu shuffled)
-  - Wide transformation (1-nhiều): những input partitions đóng góp ra 1 số output partition (shuffled chính là vs Spark trao đổi các phân vùng trên cluster)
+  - Wide transformation (1-nhiều): những input partitions đóng góp ra 1 số output partition (shuffled chính là vs Spark trao đổi các phân vùng trên cluster)  
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4780bc32-75d6-40f0-a757-a4448ac9225e)
 - Shuffle map task:
   - Spark trao đổi để phân vùng lại, ghi output ra đĩa
@@ -272,7 +280,7 @@
 - Result task: các tasks chạy song song trên RĐ rồi gửi kqua lại driver => kết quả cuối cùng
 - 2 tính năng Spark khác MapReduce:
   - Pipelining: mọi hoạt động k yêu cầu di chuyển data qua các node => thu thành 1 giai đoạn, thực hiện tốt đa các bước r mới lưu vào đĩa (ko lưu trung gian)
-  - Shuffle persistence: lưu trữ tạm thời các dữ liệu sau khi quá trình shuffle đã hoàn thành, để có thể tối ưu hóa lại việc sử dụng chúng trong các công việc sau này và giảm tối đa việc di chuyển dữ liệu qua mạng.
+  - Shuffle persistence: lưu trữ tạm thời các dữ liệu sau khi quá trình shuffle đã hoàn thành, để có thể tối ưu hóa lại việc sử dụng chúng trong các công việc sau này và giảm tối đa việc di chuyển dữ liệu qua mạng.  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c1a65d88-d008-4bc0-92c9-49adfe3f5fe2)
 - Scheduler:
   - DAG (directed acyclic graph) Scheduler: chia công việc thành một biểu đồ tuần hoàn có hướng của các state
@@ -280,5 +288,5 @@
     - Process-local tasks
     - Node-local tasks
     - Rack-local tasks
-    - Arbitrary nonlocal tasks
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/24067816-9577-4c97-8850-400f2d7e0b46)
+    - Arbitrary nonlocal tasks  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/24067816-9577-4c97-8850-400f2d7e0b46)  
