@@ -1,3 +1,4 @@
+Slide: https://docs.google.com/presentation/d/1xIFsfUiOxP3Lk3j0zNgLn54uLcegvw60XWGQouVpRPQ/edit
 # 1. Hadoop ecosystem
 - Hadoop là 1 thể hiện của Big Data, nó là một nền tảng đáng tin cậy, phân tán và có thể mở rộng để lưu trữ và phân tích lượng dữ liệu khổng lồ.
 - Type of data:
