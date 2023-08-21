@@ -122,7 +122,14 @@ Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có t
 - Từ so sánh trên ta rút ra đc ưu nhược điểm của 2 mode:
   - Client mode có tài nguyên Driver tập trung trên server riêng biệt và quản lý tệp JAR dễ dàng nhưng nếu  driver process có vde thì lại yêu cầu quản lý bổ sung từ Master Node bên ngoài.
   - Cluster Mode có khả năng chia sẻ tài nguyên và theo dõi cũng như khôi phục tự động nhưng nó cần sử dụng tài nguyên từ worker và phân phối JARs thủ công.
-# Q14: phép tính chỉ có thể thuwjcc hiện = dataset
-# Q14: transformation: narrow, wide(suffles-trao đổi giữa các partition)
-
+# Q14: Phép tính chỉ có thể thực hiện = dataset
+# Q14: Transformation: narrow, wide (suffles-trao đổi giữa các partition)
+- RDD bất biến nhưng có thể tạo mới bằng transformation cái hiện tại:
+  - Narrow transformation (1-1): 1 input partition chỉ cho ra 1 output partition (k yêu cầu shuffled)
+  - Wide transformation (1-nhiều): những input partitions đóng góp ra 1 số output partition (shuffled chính là vs Spark trao đổi các phân vùng trên cluster)
+- Shuffle map task:
+  - Spark trao đổi để phân vùng lại, ghi output ra đĩa
+  - Chạy trong mọi state trừ final state
+  - Có thể dùng lại các shuffle từ cviec trc đó thay vì tính toán lại
+  - Shuffle persistence: lưu trữ tạm thời các dữ liệu sau khi quá trình shuffle đã hoàn thành, để có thể tối ưu hóa lại việc sử dụng chúng trong các công việc sau này và giảm tối đa việc di chuyển dữ liệu qua mạng.
 
