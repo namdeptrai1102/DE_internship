@@ -122,13 +122,18 @@ Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có t
 - Từ so sánh trên ta rút ra đc ưu nhược điểm của 2 mode:
   - Client mode có tài nguyên Driver tập trung trên server riêng biệt và quản lý tệp JAR dễ dàng nhưng nếu  driver process có vde thì lại yêu cầu quản lý bổ sung từ Master Node bên ngoài.
   - Cluster Mode có khả năng chia sẻ tài nguyên và theo dõi cũng như khôi phục tự động nhưng nó cần sử dụng tài nguyên từ worker và phân phối JARs thủ công.
-# Q14: Phép tính chỉ có thể thực hiện = dataset
+# Q14: Phép tính chỉ có thể thực hiện trên dataset mà k thể trên dataframe
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f3e25c23-54ef-414b-b7ff-d76f49abbb3e)
-
+- Phần lớn các Transformation và Action mà chỉ có thể thực hiện trên Datasets (mà không thể thực hiện trên DataFrame) liên quan đến kiểu dữ liệu được xác định tại thời điểm biên dịch (strongly typed). Datasets được thiết kế để hỗ trợ xác định kiểu dữ liệu tại thời điểm biên dịch, trong khi DataFrame sử dụng một cấu trúc dữ liệu không phụ thuộc vào kiểu dữ liệu (untyped).
+- Một số Transformation và Action không thể thực hiện trên DataFrame:
+  - Transformation kiểu dữ liệu (map và flatMap với kiểu dữ liệu): Datasets cho phép thực hiện Transformation với kiểu dữ liệu, điều này có nghĩa là bạn có thể thay đổi kiểu dữ liệu của một cột trong Datasets. DataFrame không có kiểu dữ liệu được xác định tại thời điểm biên dịch cho từng cột => do đó không thể thực hiện việc này.
+  - Transformation tùy chỉnh (Custom Transformations): Datasets hỗ trợ Transformation tùy chỉnh sử dụng các hàm tự định nghĩa, còn DataFrame cần sử dụng các biểu thức SQL hoặc user-defined function (UDF) mà không có kiểu dữ liệu được xác định tại thời điểm biên dịch cho các cột.
+  - Action tùy chỉnh (Custom Actions): Datasets hỗ trợ việc thực hiện Action tùy chỉnh thông qua các tính toán user-defined (UDAF) và user-defined aggregation functions (UDAGG). DataFrame cũng hỗ trợ UDFs nhưng không có khả năng định nghĩa mở rộng cho các phép toán tổng hợp.
+- Tóm lại, Datasets có kiểu dữ liệu được xác định tại thời điểm biên dịch (strongly typed) => Transformation và Action phức tạp hơn và chính xác hơn còn DataFrame không hỗ trợ tất cả các tính năng được kiểm soát bởi kiểu dữ liệu tại thời điểm biên dịch.
 # Q14: Transformation: narrow, wide (suffles-trao đổi giữa các partition)
-- RDD bất biến nhưng có thể tạo mới bằng transformation cái hiện tại:
-  - Narrow transformation (1-1): 1 input partition chỉ cho ra 1 output partition (k yêu cầu shuffled)
-  - Wide transformation (1-nhiều): những input partitions đóng góp ra 1 số output partition (shuffled chính là vs Spark trao đổi các phân vùng trên cluster)
+- RDD bất biến nhưng có thể tạo mới bằng Transformation cái hiện tại:
+  - Narrow Transformation (1-1): 1 input partition chỉ cho ra 1 output partition (k yêu cầu shuffled)
+  - Wide Transformation (1-nhiều): những input partitions đóng góp ra 1 số output partition (shuffled chính là vs Spark trao đổi các phân vùng trên cluster)
 - Shuffle map task:
   - Spark trao đổi để phân vùng lại, ghi output ra đĩa
   - Chạy trong mọi state trừ final state
