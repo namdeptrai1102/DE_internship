@@ -139,4 +139,8 @@ Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có t
   - Chạy trong mọi state trừ final state
   - Có thể dùng lại các shuffle từ cviec trc đó thay vì tính toán lại
   - Shuffle persistence: lưu trữ tạm thời các dữ liệu sau khi quá trình shuffle đã hoàn thành, để có thể tối ưu hóa lại việc sử dụng chúng trong các công việc sau này và giảm tối đa việc di chuyển dữ liệu qua mạng.
-
+# Q15: Giải thích tại sao hadoop tiến hóa từ việc sử dụng secondary NameNode sang dùng standby NameNode
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7674745a-168f-457d-9569-2e96b025ce11)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/94ae787d-9a5b-4066-b938-ccab79d4f479)
+- Trước đây khi Active NameNode chết => secondary NameNode mất rất nhiều tgian để chuyển thành active NameNode => nghẽn cổ chai
+- Khi sử dụng HA, mọi thay đổi đều được cập nhật trên JournalNode và truy cập vởi cả Active NameNode và standby NameNode, heartbeat và report của DataNode cũng được gửi cho tất cả các NameNode(giải thích ở Q8) => khi gặp sự cố hoặc bảo trì thì stanby NameNode ngay lập tức có thể thay thế cho Active NameNode mà không tốn tgian như secondary NameNode.
