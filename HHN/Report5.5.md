@@ -123,6 +123,8 @@ Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có t
   - Client mode có tài nguyên Driver tập trung trên server riêng biệt và quản lý tệp JAR dễ dàng nhưng nếu  driver process có vde thì lại yêu cầu quản lý bổ sung từ Master Node bên ngoài.
   - Cluster Mode có khả năng chia sẻ tài nguyên và theo dõi cũng như khôi phục tự động nhưng nó cần sử dụng tài nguyên từ worker và phân phối JARs thủ công.
 # Q14: Phép tính chỉ có thể thực hiện = dataset
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f3e25c23-54ef-414b-b7ff-d76f49abbb3e)
+
 # Q14: Transformation: narrow, wide (suffles-trao đổi giữa các partition)
 - RDD bất biến nhưng có thể tạo mới bằng transformation cái hiện tại:
   - Narrow transformation (1-1): 1 input partition chỉ cho ra 1 output partition (k yêu cầu shuffled)
