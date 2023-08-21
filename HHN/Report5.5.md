@@ -67,7 +67,13 @@ Trong Hadoop, có 2 parameters liên quan đến replication
 - dfs.replication: Số lượng replica thực tế có thể được chỉ định khi tệp được tạo. Giá trị mặc định được sử dụng nếu bản sao không được chỉ định trong thời gian tạo. Quá trình sao chép tới dfs.replication sẽ diễn ra theo quy trình tuần tự.
 - dfs.namenode.replication.min : replicas block tối thiểu.
 => Khi dfs.namenode.replication.min đã được đáp ứng, thao tác ghi sẽ được coi là thành công.
-
-
+# Q8: DataNode có gửi heartbeat và block report tất cả các active và Stanby node không
+# Q9: Suffer: map xong suffer để gom các key giống nhau về cùng 1 partition?
+# Q10: nhiều key vào cùng 1 phân vùng => out phân vùng thì sao
+# Q11: 2 cơ chế khởi động lại RM: bảo vệ, ko bảo vệ
+# Q12: Active RM đồng bộ standby RM ntn
+# Q13: ưu nhược điểm cluster client node
+# Q14: phép tính chỉ có thể thuwjcc hiện = dataset
+# Q14: transformation: narrow, wide(suffles-trao đổi giữa các partition)
 
 
