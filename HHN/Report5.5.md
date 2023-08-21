@@ -68,10 +68,45 @@ Trong Hadoop, có 2 parameters liên quan đến replication
 - dfs.namenode.replication.min : replicas block tối thiểu.
 => Khi dfs.namenode.replication.min đã được đáp ứng, thao tác ghi sẽ được coi là thành công.
 # Q8: DataNode có gửi heartbeat và block report tất cả các active và Stanby node không
-# Q9: Suffer: map xong suffer để gom các key giống nhau về cùng 1 partition?
-# Q10: nhiều key vào cùng 1 phân vùng => out phân vùng thì sao
+CÓ
+- Để các standby NameNode giữ trạng thái của chúng được đồng bộ hóa với active NameNode, việc triển khai hiện tại yêu cầu các nút có quyền truy cập vào một thư mục trên thiết bị lưu trữ dùng chung (ví dụ: rack NFS từ NAS, JournalNode).
+- Khi bất kỳ sửa đổi không gian tên nào được thực hiện bởi activve NameNode, nó sẽ ghi nhật ký sửa đổi một cách lâu dài vào 1 edit log được lưu trữ trong thư mục dùng chung.
+- Các standby NameNode liên tục theo dõi thư mục này để chỉnh sửa và khi nó thấy các chỉnh sửa, nó sẽ cập nhật chúng vào không gian tên của chính nó.
+- Trong trường hợp chuyển đổi dự phòng, standby NameNode sẽ đảm bảo rằng nó đã đọc tất cả các chỉnh sửa từ bộ nhớ dùng chung trước khi tự thăng cấp lên active Node (đảm bảo rằng trạng thái không gian tên được đồng bộ hóa hoàn toàn trước khi chuyển đổi dự phòng xảy ra).
+- Để cung cấp chuyển đổi dự phòng nhanh, các standby NameNode cũng cần có thông tin cập nhật về vị trí của các khối trong cụm.
+=> Để đạt được điều này, các DataNode được cấu hình với vị trí của tất cả các NameNode và gửi thông tin vị trí khối cũng như heartbeat tới tất cả các NameNode.
+# Q9: Suffling
+Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có thể bắt đầu chạy trước khi mapper hoàn thành tất cả tác vụ. Quá trình này bao gồm:
+- Sorting: Các cặp key-val từ các Mapper được sắp xếp dựa trên key => đảm bảo rằng các giá trị có cùng key sẽ được nhóm lại cùng nhau để xử lý bởi cùng một Reducer.
+- Partitioning: Sau khi sắp xếp, dữ liệu sẽ được chia thành các partitions tương ứng với số lượng Reducer. Mỗi phần sẽ chứa các cặp key-val được gửi đến một Reducer cụ thể.
+- Data Transfer: Dữ liệu được chuyển giao từ Mapper đến Reducer tương ứng (thường bao gồm việc truyền dữ liệu qua mạng từ các nút của cluster đến nút chứa Reducer)
+- Ghi dữ liệu vào Reducer Input: Sau khi dữ liệu đã được sắp xếp và chuyển giao, nó được lưu trữ trong input của các Reducer để tiếp tục xử lý bởi các Reducer.
+# Q10: Nhiều key vào cùng 1 phân vùng => out phân vùng thì sao
+- Nếu số lượng key-value trong một phân vùng vượt quá kích thước tối đa cho phân vùng đó, một số vấn đề có thể xảy ra:
+  - Bị tràn bộ nhớ: Nếu một phân vùng có quá nhiều key-value, nó có thể dẫn đến tràn bộ nhớ trên máy tính chứa Reducer => gây ra lỗi và làm giảm hiệu suất
+  - Thời gian Shuffling tăng lên: Quá nhiều dữ liệu trong một phân vùng có thể làm tăng thời gian cần thiết để truyền dữ liệu từ Mapper đến Reducer thông qua mạng => trễ trong quá trình Shuffling.
+  - Không cân bằng Reducer: Nếu một phân container quá nhiều dữ liệu, nó có thể gây ra sự không cân bằng trong việc xử lý của các Reducer. Một số Reducer sẽ phải xử lý nhiều dữ liệu hơn, trong khi một số khác ít hơn.
+- Giải pháp:
+  - Tăng kích thước của phân vùng: tăng kích thước tối đa cho mỗi phân vùng trong cấu hình MapReduce để chứa nhiều dữ liệu hơn.
+  - Sử dụng Combiner: Combiner là một phần của MapReduce cho phép tổng hợp dữ liệu trung gian trước khi nó được chuyển đến Reducer.
+  - Sử dụng Compresssion: nén dữ liệu để giảm kích thước dữ liệu trung gian và giảm tải trên mạng trong quá trình Shuffling.
 # Q11: 2 cơ chế khởi động lại RM: bảo vệ, ko bảo vệ
+- Non-work-preserving RM restart (Khởi động lại RM không bảo toàn công việc)
+  - RM sẽ lưu metadata ứng dụng (tức là ApplicationSubmissionContext) trong pluggable state-store khi ứng dụng khách gửi ứng dụng và cũng lưu trạng thái cuối cùng của ứng dụng, chẳng hạn như trạng thái hoàn thành (thất bại, bị hủy hoặc đã hoàn thành) và chẩn đoán khi ứng dụng hoàn tất,các thông tin xác thực như khóa bảo mật, token để hoạt động trong môi trường an toàn.
+  - Khi RM tắt, miễn là thông tin bắt buộc (metadata ứng dụng và thông tin đăng nhập bên cạnh nếu chạy trong môi trường an toàn) có sẵn trong state-store, thì khi RM khởi động lại, nó có thể lấy metadata ứng dụng từ state-store và gửi lại ứng dụng.
+  - RM sẽ không gửi lại các ứng dụng nếu chúng đã được hoàn thành (tức là không thành công, bị hủy hoặc hoàn thành) trước khi RM ngừng hoạt động.
+  - NodeManagers và khách hàng trong thời gian ngừng hoạt động của RM sẽ tiếp tục thăm dò RM cho đến khi RM xuất hiện. Khi RM xuất hiện, nó sẽ gửi lệnh đồng bộ hóa lại tới tất cả các NodeManager và ApplicationMaster mà nó đang giao tiếp qua heartbeat.
+  - Các NodeManager sẽ hủy tất cả các container được quản lý của nó và đăng ký lại với RM.
+  - Sau khi RM khởi động lại và tải tất cả siêu dữ liệu ứng dụng, thông tin xác thực từ state-store và đưa chúng vào bộ nhớ, nó sẽ tạo ApplicationMastermới cho từng ứng dụng chưa hoàn thành và khởi động lại ứng dụng đó như bình thường.
+  **Công việc của các ứng dụng đang chạy trước đó bị mất theo cách này do về cơ bản chúng bị RM kill thông qua lệnh đồng bộ lại khi khởi động lại.**
+- Work-preserving RM restart (Khởi động lại RM bảo toàn công việc)
+  - RM đảm bảo tính bền vững của trạng thái ứng dụng và tải lại trạng thái đó khi khôi phục, tập trung vào việc xây dựng lại toàn bộ trạng thái đang chạy của cụm YARN, phần lớn trong số đó là trạng thái của scheduler trung tâm bên trong RM (nơi theo dõi tất cả container’s life-cycle, các yêu cầu tài nguyên, hàng đợi, v.v. => RM không cần tắt AM và chạy lại ứng dụng từ đầu mà ứng dụng có thể đơn giản đồng bộ lại với RM và tiếp tục từ nơi nó đã dừng lại.
+  - RM phục hồi trạng thái đang chạy của nó bằng cách tận dụng trạng thái container được gửi từ tất cả các NM.
+  - NM sẽ không hủy các container khi nó đồng bộ hóa lại với RM đã khởi động lại mà tiếp tục quản lý các container và gửi trạng thái container tới RM khi nó đăng ký lại.
+  - RM tái tạo lại các phiên bản container và trạng thái lập lịch trình của các ứng dụng được liên kết bằng cách sử dụng thông tin của các container này.
+  - Trong thời gian chờ đợi, AM cần gửi lại các yêu cầu tài nguyên chưa xử lý cho RM vì RM có thể mất các yêu cầu chưa được thực hiện khi tắt máy (Lập trình viên sử dụng thư viện AMRMClient để giao tiếp với RM không cần phải lo lắng về phần AM gửi lại yêu cầu tài nguyên cho RM khi đồng bộ hóa lại, vì nó được thư viện tự động đảm nhận).
 # Q12: Active RM đồng bộ standby RM ntn
+*Em đã trả lời câu này trong Q8*
 # Q13: ưu nhược điểm cluster client node
 # Q14: phép tính chỉ có thể thuwjcc hiện = dataset
 # Q14: transformation: narrow, wide(suffles-trao đổi giữa các partition)
