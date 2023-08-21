@@ -109,18 +109,19 @@ Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có t
 *Em đã trả lời câu này trong Q8*
 # Q13: Ưu nhược điểm của execution cluster & client mode:
 - Client mode:
-  - Driver chạy trên một Master node bên trong một quy trình chuyên dụng. Điều này có nghĩa là nó có tất cả các tài nguyên sẵn có để thực hiện công việc.
-Driver mở một Server Netty HTTP chuyên dụng và phân phối các tệp JAR được chỉ định cho tất cả các nút Worker (lợi thế lớn).
-Vì nút Chính có các tài nguyên chuyên dụng của riêng nó nên bạn không cần phải "tiêu tốn" tài nguyên Worker cho chương trình Driver.
-Nếu quá trình Driver chết, bạn cần một hệ thống giám sát bên ngoài để thiết lập lại quá trình thực thi của nó.
-Cụm:
-
-Driver chạy trên một trong các nút Worker của cụm. Worker được chọn bởi Master leader
-Driver chạy như một quy trình chuyên dụng, độc lập bên trong Worker.
-Các chương trình Driver chiếm ít nhất 1 lõi và một lượng bộ nhớ chuyên dụng từ một trong các Worker (điều này có thể được định cấu hình).
-Chương trình Driver có thể được theo dõi từ nút Chính bằng cách sử dụng cờ --supervise và được đặt lại trong trường hợp nó chết.
-Khi làm việc ở chế độ Cụm, tất cả các JAR liên quan đến việc thực thi ứng dụng của bạn cần phải được cung cấp công khai cho tất cả nhân viên. Điều này có nghĩa là bạn có thể đặt chúng theo cách thủ công ở một nơi dùng chung hoặc trong một thư mục cho từng nhân viên.
-
+  - Driver chạy trên một Master node bên trong một quy trình chuyên dụng (nghĩa là nó có tất cả các tài nguyên sẵn có để thực hiện công việc)
+  - Driver mở 1 Netty HTTP Server chuyên dụng và phân phối các tệp JAR được chỉ định cho tất cả các nút Worker **(lợi thế lớn)**.
+  - Vì Master Node có các tài nguyên chuyên dụng của riêng nó nên không cần phải "tiêu tốn" tài nguyên Worker cho chương trình Driver.
+  - Nếu Driver process chết => cần một hệ thống giám sát bên ngoài để thiết lập lại quá trình thực thi của nó.
+- Cluster mode:
+  - Driver chạy trên một trong các nút Worker của cụm. Worker được chọn bởi Master leader
+  - Driver chạy như một quy trình chuyên dụng, độc lập bên trong Worker.
+  - Các chương trình Driver chiếm ít nhất 1 lõi và một lượng bộ nhớ chuyên dụng từ một trong các Worker **(điều này có thể được định cấu hình)**.
+  - Driver process có thể được theo dõi từ Master Node bằng cách sử dụng --supervise flag và được đặt lại trong trường hợp nó chết.
+  - Khi làm việc ở cluster mode, tất cả các JAR liên quan đến việc thực thi ứng dụng cần phải được cung cấp công khai cho tất cả Worker (có nghĩa là có thể đặt chúng theo cách thủ công ở một nơi dùng chung hoặc trong một thư mục cho từng Worker).
+- Từ so sánh trên ta rút ra đc ưu nhược điểm của 2 mode:
+  - Client mode có tài nguyên Driver tập trung trên server riêng biệt và quản lý tệp JAR dễ dàng nhưng nếu  driver process có vde thì lại yêu cầu quản lý bổ sung từ Master Node bên ngoài.
+  - Cluster Mode có khả năng chia sẻ tài nguyên và theo dõi cũng như khôi phục tự động nhưng nó cần sử dụng tài nguyên từ worker và phân phối JARs thủ công.
 # Q14: phép tính chỉ có thể thuwjcc hiện = dataset
 # Q14: transformation: narrow, wide(suffles-trao đổi giữa các partition)
 
