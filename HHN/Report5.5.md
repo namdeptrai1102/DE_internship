@@ -27,7 +27,7 @@
 - Ưu tiên theo độ gần với node client (cùng node, cùng rack, khác rack)
 # Q4: Block report là gì?
 - DataNode xác định các bản sao khối mà nó sở hữu cho NameNode bằng cách gửi block report.
-  - Block report chứa ID block,  generation stamp(cái này để xdinh phiên bản) và độ dài cho mỗi replica block mà máy chủ lưu trữ.
+  - Block report chứa ID block,  generation stamp(cái này để xdinh phiên bản) và độ dài cho mỗi replica block mà Server lưu trữ.
   - Block report đầu tiên được gửi ngay sau khi đăng ký DataNode (1 báo cáo khối đầy đủ chứa danh mục tất cả các khối của node)
   - Các block report tiếp theo được gửi mỗi giờ (đây là các báo cáo khối gia tăng, cung cấp cho NameNode cập nhật về vị trí của các bản sao khối trên cụm và thông tin liên quan đến các khối đã được thêm/xóa gần đây)
 - Giống như block report, DataNode cũng gửi cache report đến NameNode.
@@ -107,7 +107,20 @@ Shuffling là quá trình chuyển giao data từ mapper sang reducer, nó có t
   - Trong thời gian chờ đợi, AM cần gửi lại các yêu cầu tài nguyên chưa xử lý cho RM vì RM có thể mất các yêu cầu chưa được thực hiện khi tắt máy (Lập trình viên sử dụng thư viện AMRMClient để giao tiếp với RM không cần phải lo lắng về phần AM gửi lại yêu cầu tài nguyên cho RM khi đồng bộ hóa lại, vì nó được thư viện tự động đảm nhận).
 # Q12: Active RM đồng bộ standby RM ntn
 *Em đã trả lời câu này trong Q8*
-# Q13: ưu nhược điểm cluster client node
+# Q13: Ưu nhược điểm của execution cluster & client mode:
+- Client mode:
+  - Driver chạy trên một Master node bên trong một quy trình chuyên dụng. Điều này có nghĩa là nó có tất cả các tài nguyên sẵn có để thực hiện công việc.
+Driver mở một Server Netty HTTP chuyên dụng và phân phối các tệp JAR được chỉ định cho tất cả các nút Worker (lợi thế lớn).
+Vì nút Chính có các tài nguyên chuyên dụng của riêng nó nên bạn không cần phải "tiêu tốn" tài nguyên Worker cho chương trình Driver.
+Nếu quá trình Driver chết, bạn cần một hệ thống giám sát bên ngoài để thiết lập lại quá trình thực thi của nó.
+Cụm:
+
+Driver chạy trên một trong các nút Worker của cụm. Worker được chọn bởi Master leader
+Driver chạy như một quy trình chuyên dụng, độc lập bên trong Worker.
+Các chương trình Driver chiếm ít nhất 1 lõi và một lượng bộ nhớ chuyên dụng từ một trong các Worker (điều này có thể được định cấu hình).
+Chương trình Driver có thể được theo dõi từ nút Chính bằng cách sử dụng cờ --supervise và được đặt lại trong trường hợp nó chết.
+Khi làm việc ở chế độ Cụm, tất cả các JAR liên quan đến việc thực thi ứng dụng của bạn cần phải được cung cấp công khai cho tất cả nhân viên. Điều này có nghĩa là bạn có thể đặt chúng theo cách thủ công ở một nơi dùng chung hoặc trong một thư mục cho từng nhân viên.
+
 # Q14: phép tính chỉ có thể thuwjcc hiện = dataset
 # Q14: transformation: narrow, wide(suffles-trao đổi giữa các partition)
 
