@@ -105,7 +105,8 @@ Slide: https://docs.google.com/presentation/d/1xIFsfUiOxP3Lk3j0zNgLn54uLcegvw60X
 - Cách khác: chia sẻ NFS (Network File System)
   - Active Namenode ghi lại bất kỳ sửa đổi nào trong namespace của nó trong log file vào 1 thư mục NFS dùng chung
   - Các standby NameNode liên tục theo dỗi và cập nhật theo NFS đó
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/dde1ed69-39c7-477d-83bd-b005de9f75fd)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/dde1ed69-39c7-477d-83bd-b005de9f75fd)  
+[Ngoài ra còn có Zookeeper (thảo luận sau) và Failover Controller viết tắt là ZK và FC tương ứng trong hình minh họa. FC là một thành phần liên quan đến Zookeeper định kỳ ping Namenode để kiểm tra tình trạng và báo cáo bất kỳ lỗi nào cho Zookeeper]
 # 3. YARN & Map Reduce
 ## 3.1 YARN (Yet Another Resource Negotiator)
 - Yarn đc coi tương tự như 1 hđh cho 1 cluster (một tập hợp các máy tính được kết nối, hoạt động cùng nhau để được xem như một hệ thống duy nhất; đại diện cho tập hợp các tài nguyên)
