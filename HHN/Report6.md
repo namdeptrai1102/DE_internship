@@ -75,7 +75,7 @@ Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng đ�
     - Replace cả dòng: c$
 ## Quản lý tiến trình:
   - htop: chạy 1 giao diện giống lệnh top trên linux (show các tiến trình trên linux)
-  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4782e4b4-689a-4041-9371-adc9c031f8b2)
+   https://www.cyberciti.biz/faq/how-to-install-htop-on-ubuntu-linux-using-apt/#:~:text=Procedure%20to%20install%20htop%20on%20Ubuntu%20Linux%201,snap%20install%20htop%205%20Launch%20htop%2C%20type%3A%20htop
     - Giải thích các cột:
       - PID: ID của tiến trình
       - PR: độ ưu tiên của tiến trình (số càng thấp ưu tiên càng cao)
