@@ -49,9 +49,11 @@
 - echo "aabb" > test.txt: ghi mới "aabb" vào file test.txt 
 - echo "cc" >> test.txt: nối tiếp "cc" vào file test.txt
 ## Sử dụng vim:
-  - tạo file mới
-  - sửa file
-  - save
+Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng để cho phép chỉnh sửa văn bản hiệu quả, nỗ trợ hầu hết các loại tệp => vim còn được gọi là trình soạn thảo của lập trình viên 
+**Chạy: vim**
+  - Tạo file mới:
+  - Sửa file
+  - Save
 ## Quản lý tiến trình:
   - htop
   - ps aux
