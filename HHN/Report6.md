@@ -1,26 +1,26 @@
 # Tìm hiểu shell linux
-- Các command cơ bản:
-  - cd: chọn thư mục (cd .. để back lại thư mục trc đó)
-  - ls: trả về 1 list file và folder
-  - cp: copy file/thư mục sang 1 destination path
-  - mv: di chuyển file/thư mục sang 1 destination path
-  - mkdir: tạo 1 thư mục (nếu chưa tồn tại)
-  - cat:
-    - In nội dung file (tại dòng n -optional): cat -n filename (dùng thêm more để xem theo từng trang và less để tùy chỉnh xem lên xuống)
-    - In nội dung nhiều file: cat filename1 filename2
-    - Tạo file mới, viết nội dung file(ctrD để hoàn thành): cat >filename
-    - Cho nội dung từ file này vào file khác: cat filenam1 > filename2
-    - Ghép nội dung từ nhiều file vào file khác: cat filenam1 filename2 > filename3
-    - In đảo ngược thứ tự của file được ghép vào: tac filename3 (nó sẽ in nội dung filename2 rồi in filename1)
-    - Nối file trước vào đuôi file sau: cat filenam1 >> filename2
-    - Nối nội dung vào 1 file: cat >> filename
-  - head -N filename: in N dòng đầu trong file (default là 10)
-- Các command liên quan đến quyền:
-  - chmod [options] [mode] [File_name]
-    - [options]:
-      - -R: áp dụng thay đổi quyền một cách đệ quy cho tất cả các tệp và thư mục trong thư mục đã chỉ định.
-      - -v: hiển thị một thông báo cho mỗi tệp được xử lý, chỉ ra cả sự thay đổi quyền đã được thực hiện
-      - -c: hoạt động tương tự như '-v' nhưng trong trường hợp này nó chỉ hiển thị thông báo cho các tệp có quyền được thay đổi
+## Các command cơ bản:
+- cd: chọn thư mục (cd .. để back lại thư mục trc đó)
+- ls: trả về 1 list file và folder
+- cp: copy file/thư mục sang 1 destination path
+- mv: di chuyển file/thư mục sang 1 destination path
+- mkdir: tạo 1 thư mục (nếu chưa tồn tại)
+- cat:
+  - In nội dung file (tại dòng n -optional): cat -n filename (dùng thêm more để xem theo từng trang và less để tùy chỉnh xem lên xuống)
+  - In nội dung nhiều file: cat filename1 filename2
+  - Tạo file mới, viết nội dung file(ctrD để hoàn thành): cat >filename
+  - Cho nội dung từ file này vào file khác: cat filenam1 > filename2
+  - Ghép nội dung từ nhiều file vào file khác: cat filenam1 filename2 > filename3
+  - In đảo ngược thứ tự của file được ghép vào: tac filename3 (nó sẽ in nội dung filename2 rồi in filename1)
+  - Nối file trước vào đuôi file sau: cat filenam1 >> filename2
+  - Nối nội dung vào 1 file: cat >> filename
+- head -N filename: in N dòng đầu trong file (default là 10)
+## Các command liên quan đến quyền:
+- chmod [options] [mode] [File_name]
+  - [options]:
+    - -R: áp dụng thay đổi quyền một cách đệ quy cho tất cả các tệp và thư mục trong thư mục đã chỉ định.
+    - -v: hiển thị một thông báo cho mỗi tệp được xử lý, chỉ ra cả sự thay đổi quyền đã được thực hiện
+    - -c: hoạt động tương tự như '-v' nhưng trong trường hợp này nó chỉ hiển thị thông báo cho các tệp có quyền được thay đổi
   - [mode]:
     - Đối tượng: u(owner), g(group), o(others), a(all)
     - Toán tử: + (thêm quyền), - (bớt quyền), = (trao quyền)
