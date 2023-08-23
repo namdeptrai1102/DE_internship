@@ -49,11 +49,30 @@
 - echo "aabb" > test.txt: ghi mới "aabb" vào file test.txt 
 - echo "cc" >> test.txt: nối tiếp "cc" vào file test.txt
 ## Sử dụng vim:
-Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng để cho phép chỉnh sửa văn bản hiệu quả, nỗ trợ hầu hết các loại tệp => vim còn được gọi là trình soạn thảo của lập trình viên 
-**Chạy: vim**
-  - Tạo file mới:
-  - Sửa file
-  - Save
+Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng để cho phép chỉnh sửa văn bản hiệu quả, nỗ trợ hầu hết các loại tệp => vim còn được gọi là trình soạn thảo của lập trình viên  
+**Hướng dấn: vimtutor**
+  - Tạo file mới: vim filename.txt
+  - Sửa file: i + Enter (sau đó bắt đầu ghi nội dung), Esc để thoát insert mode
+    - i: con trỏ tại vị trí hiện tại
+    - a: con trỏ tại vị trí sau hiện tại
+    - o: con trỏ tại dòng dưới vị trí hiện tại
+    - 0: con trỏ tại dòng trên vị trí hiện tại 
+  - Save and exit: ":wq!" (nếu k muốn save thì ":q!")
+  - Di chuyển con trỏ (dùng mũi tên):
+    - Di chuyển nhanh hơn: k^, h< ,l>, jv
+    - Di chuyển 2 từ: 2w
+    - Di chuyển 4 dòng: 4$
+    - Di chuyển đến đầu file: :gg
+    - Di chuyển đến cuối file: :G
+  - Xóa:
+    - Xóa từ: dw (2 từ: d2w)
+    - Xóa dòng: d$
+    - Xóa kí tự: trỏ đến kí tự cần xóa + x
+  - Undo: u, Redo: crt + r
+  - Replace:
+    - Replace kí tự: r
+    - Replace từ: re
+    - Replace cả dòng: c$
 ## Quản lý tiến trình:
   - htop
   - ps aux
