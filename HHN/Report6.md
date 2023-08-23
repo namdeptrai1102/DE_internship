@@ -26,13 +26,13 @@
     - Toán tử: + (thêm quyền), - (bớt quyền), = (trao quyền)
     - Quyền: r(đọc), w(ghi), x(thực thi)
     - Octal mode: sử dụng 3 bit biểu diễn quyền của u,g,o (VD: 777 tức là tất cả đc thực thi cả 3 quyền)
-  - chown: thay đổi chủ sở hữu của file hoặc folder: sudo chown [options] new_owner[:new_group] file(s)
+- chown: thay đổi chủ sở hữu của file hoặc folder: sudo chown [options] new_owner[:new_group] file(s)
     - new_owner: Tên người dùng mới mà bạn muốn đặt làm chủ sở hữu cho tệp hoặc thư mục.
     - new_group: Tên nhóm người dùng mới mà bạn muốn đặt cho tệp hoặc thư mục (tùy chọn).
     - file(s): Danh sách các tệp hoặc thư mục mà bạn muốn thay đổi chủ sở hữu.
     - VD: chown user1 example.txt(sở hữu bởi user1), chown user2:group2 myfolder
 (sở hữu bởi user2 nhóm 2)
-  - ls -l: trả về list các file và thư mục cùng thông tin của chúng:
+- ls -l: trả về list các file và thư mục cùng thông tin của chúng:
     - VD: drwxrwxr-x 3 hoanghainam hoanghainam 4096 Jul 21 09:39 apache-maven
     - drwxrwxr-x: d là thư mục (file là -), theo sau là quyền
     - 3: Đây là số lượng liên kết tới thư mục hoặc tệp
