@@ -40,16 +40,14 @@
     - hoanghainam: Đây là tên của nhóm mà người dùng thuộc về. Tất cả các thành viên trong nhóm này có quyền truy cập như nhau đối với thư mục hoặc tệp.
     - 4096: Đây là kích thước của thư mục hoặc tệp trong byte.
     - Jul 21 09:39: Đây là ngày và thời gian mà thư mục hoặc tệp được sửa đổi cuối cùng.
-    - apache-maven: Đây là tên của thư mục hoặc tệp.
-
-    
-     
-- Các command thực hiện song song:
-  - cat test.txt | wc -l
-  - cat test.txt | grep "a"
-  - cat test.txt | head
-  - echo "aabb" > test.txt
-  - echo "cc" >> test.txt
+    - apache-maven: Đây là tên của thư mục hoặc tệp.   
+## Các command thực hiện song song:
+- cat test.txt | wc -l: in ra số dòng của file
+  - nếu chỉ có wc thì default là: số dòng  số từ  số kí tự
+- cat test.txt | grep "a"
+- cat test.txt | head
+- echo "aabb" > test.txt
+- echo "cc" >> test.txt
 - Sử dụng vim:
   - tạo file mới
   - sửa file
