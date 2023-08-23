@@ -74,6 +74,27 @@ Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng đ�
     - Replace từ: re
     - Replace cả dòng: c$
 ## Quản lý tiến trình:
-  - htop
+  - htop: chạy 1 giao diện giống lệnh top trên linux (show các tiến trình trên linux)
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4782e4b4-689a-4041-9371-adc9c031f8b2)
+    - Giải thích các cột:
+      - PID: ID của tiến trình
+      - PR: độ ưu tiên của tiến trình (số càng thấp ưu tiên càng cao)
+      - VIRT: tổng số bộ nhớ ảo đc task sử dụng
+      - USER: tên ng sở hữu task
+      - %CPU: Mức sử dụng CPU
+      - TIME+: CPU time
+      - SHR: kích thước bộ nhớ dùng chung task sử dụng
+      - NI: Nice Value của task (âm => độ ưu tiên cao hơn, dương => độ ưu tiên thấp hơn)
+      - %MEM: Memory usage của task
+      - RES: lượng RAM vật lý tiến trình sử dung (KB)
+      - COMMAND: tên của lệnh bắt đầu tiến trình
+    - 1 số câu lệnh htop:
+      - htop trắng đen: htop -c hoặc htop --no-color
+      - Xem tiến trình htop theo cấu trúc cây: htop -t hoặc htop --tree
+      - Xem tiến trình của user có tên là vivek: htop -u vivek hoặc htop --user=vivek
+      - Xem tiến trình theo PID: htop -p PID1, PID2 hoặc htop --pid = PID1, PID2
+    - Shortcut keys trong htop:
+      ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/022cafcd-3745-4751-bcf3-7e816d7b8f10)
+
   - ps aux
   - kill -9
