@@ -43,16 +43,16 @@
     - apache-maven: Đây là tên của thư mục hoặc tệp.   
 ## Các command thực hiện song song:
 - cat test.txt | wc -l: in ra số dòng của file
-  - nếu chỉ có wc thì default là: số dòng  số từ  số kí tự
-- cat test.txt | grep "a"
-- cat test.txt | head
-- echo "aabb" > test.txt
-- echo "cc" >> test.txt
-- Sử dụng vim:
+  - nếu chỉ có wc thì default là: số dòng - số từ - số kí tự
+- cat test.txt | grep "a": in ra tất cả các dòng chứa kí tự "a"
+- cat test.txt | head: in ra các dòng đầu tiên của file, defaut là 10
+- echo "aabb" > test.txt: ghi mới "aabb" vào file test.txt 
+- echo "cc" >> test.txt: nối tiếp "cc" vào file test.txt
+## Sử dụng vim:
   - tạo file mới
   - sửa file
   - save
-- Quản lý tiến trình:
+## Quản lý tiến trình:
   - htop
   - ps aux
   - kill -9
