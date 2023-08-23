@@ -95,6 +95,12 @@ Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng đ�
       - Xem tiến trình theo PID: htop -p PID1, PID2 hoặc htop --pid = PID1, PID2
     - Shortcut keys trong htop:
       ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/022cafcd-3745-4751-bcf3-7e816d7b8f10)
-
-  - ps aux
-  - kill -9
+- ps aux: Hiển thị tổng quan về tất cả các tiến trình đang chạy
+- kill [OPTIONS] [PID]
+  - [OPTIONS]: kill -l trả về danh sách mọi lệnh kill, phổ biến nhất là 3 lệnh:
+    - kill -1: reload tiến trình
+    - kill -9: kill tiến trình
+    - kill -15: dừng tiến trình (default)
+  - [PID]: PID của tiến trình
+    - VD: kill -9 6263 6199 6142 6076
+    - Lấy PID tiến tình bằng lệnh pidof (VD: pidof firefox) => có thể gộp câu lệnh: kill -9 $(pidof firefox)
