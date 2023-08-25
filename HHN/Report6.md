@@ -108,41 +108,72 @@ Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng đ�
 ## 2.1 Chạy rest API cơ bản bằng flask python
 Tham khảo: https://www.digitalocean.com/community/tutorials/how-to-build-and-deploy-a-flask-application-using-docker-on-ubuntu-20-04#1-minor-inconsistency-in-uwsgi-ini
 ### Bước 1: Set up flash application
-- Tạo 1 thư mục flash, bên trong nó có 1 thư mục con là app gồm 2 thư mục con là static và templates
-- Trong app, tạo file __init__.py với nội dung:
-      from flask import Flask
-      app = Flask(__name__)
-      from app import views
-- Trong app, ạo file views.py:
-       from app import app
-      @app.route('/') #đường dẫn gốc
-      def home(): #funtion home
-      return "hello world!"
-- Tạo file uwsgi.ini:
+- Tạo 1 thư mục flash, bên trong nó có 1 thư mục con là app gồm 2 thư mục con là static và templates  
+- Trong app, tạo file __init__.py với nội dung:  
+      from flask import Flask  
+      app = Flask(__name__)  
+      from app import views  
+- Trong app, tạo file views.py:  
+       from app import app  
+      @app.route('/') #đường dẫn gốc  
+      def home(): #funtion home  
+      return "hello world!"  
+- Tạo file uwsgi.ini:  
     [uwsgi]
-    module = main
-    callable = app
-    master = true
-    sudo touch uwsgi.ini #cái này để cập nhật thay đổi mà k càn phải restart lại docker
-- Tạo file requirements.txt:
+    module = main  
+    callable = app  
+    master = true  
+    sudo touch uwsgi.ini #cái này để cập nhật thay đổi mà k cần phải restart lại docker  
+- Tạo file requirements.txt:  
     Flask>=2.0.2
 ### Bước 2: Set up Docker
-- Tạo Dockerfiles: 
-FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
-RUN apk --update add bash nano
-ENV STATIC_URL /static
-ENV STATIC_PATH /var/www/app/static
-COPY ./requirements.txt /var/www/requirements.txt
-RUN pip install -r /var/www/requirements.txt
+- Tạo Dockerfiles:  
+FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine  
+RUN apk --update add bash nano  
+ENV STATIC_URL /static  
+ENV STATIC_PATH /var/www/app/static  
+COPY ./requirements.txt /var/www/requirements.txt  
+RUN pip install -r /var/www/requirements.txt  
 - Check cổng xem có free không: sudo nc localhost 56733 < /dev/null; echo $?  (trả về 1 là đúng)
 - Tạo file start.sh và thực thi:
-  #!/bin/bash
-  app="docker.test"
-  docker build -t ${app} .
-  docker run -d -p 56733:80 \
-  --name=${app} \
-  -v $PWD:/app ${app}
+  #!/bin/bash  
+  app="docker.test"  
+  docker build -t ${app} .  
+  docker run -d -p 56733:80 \  
+  --name=${app} \  
+  -v $PWD:/app ${app}  
 - Check containers: sudo docker ps
+- Kết quả:
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2004f44f-bf48-49cd-85e0-aa171c8e6f9e)
+### Bước 3: Tạo template Ping - Pong
+- Trong app, tạo thư mục templates gồm 1 file pong.html:
+  <!doctype html>  
+
+<html lang="en-us">     
+  <head>  
+    <meta charset="utf-8">  
+    <meta http-equiv="x-ua-compatible" content="ie=edge">  
+    <title>pong!</title>  
+  </head>  
+  
+  <body>  
+    <h1>Home Page</h1>  
+    <p>PONG!!!!!!</p>  
+  </body>   
+</html>  
+- Sửa file views.py thành:
+from app import app  
+from flask import render_template  
+
+@app.route('/')  
+def home():  
+   return "Hello"  
+
+@app.route('/ping')  
+def ping():  
+    return render_template('pong.html')  
+- Chạy: sudo touch uwsgi.ini  
+- Kết quả:
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4bb09224-1093-4648-baf2-1eaaf75343df)
 
-- ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2004f44f-bf48-49cd-85e0-aa171c8e6f9e)
+- 
