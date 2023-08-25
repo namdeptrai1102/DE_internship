@@ -144,7 +144,7 @@ RUN pip install -r /var/www/requirements.txt
   -v $PWD:/app ${app}  
 - Check containers: sudo docker ps
 - Kết quả:
-  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2004f44f-bf48-49cd-85e0-aa171c8e6f9e)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4bb09224-1093-4648-baf2-1eaaf75343df)
 ### Bước 3: Tạo template Ping - Pong
 - Trong app, tạo thư mục templates gồm 1 file pong.html:
   <!doctype html>  
@@ -173,7 +173,7 @@ def home():
 def ping():  
     return render_template('pong.html')  
 - Chạy: sudo touch uwsgi.ini  
-- Kết quả:
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4bb09224-1093-4648-baf2-1eaaf75343df)
+- Kết quả:  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/6b0e8243-7697-4189-a2c2-2f8f9df42225)
 
 - 
