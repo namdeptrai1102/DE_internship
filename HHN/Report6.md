@@ -146,20 +146,7 @@ RUN pip install -r /var/www/requirements.txt
 - Kết quả:  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4bb09224-1093-4648-baf2-1eaaf75343df)
 ### Bước 3: Tạo template Ping - Pong
-- Trong app, tạo thư mục templates gồm 1 file pong.html:
-//  <!doctype html>  
-//<html lang="en-us">     
-//  <head>  
-//    <meta charset="utf-8">  
-//    <meta http-equiv="x-ua-compatible" content="ie=edge">  
-//    <title>pong!</title>  
-//  </head>  
-  
-//  <body>  
-//    <h1>Home Page</h1>  
-//    <p>PONG!!!!!!</p>  
-//  </body>   
-//</html>  
+- Trong app, tạo thư mục templates gồm 1 file pong.html hiển thị PONG!!!!!!
 - Sửa file views.py thành:
 from app import app  
 from flask import render_template  
