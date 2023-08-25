@@ -1,5 +1,5 @@
-# Tìm hiểu shell linux
-## Các command cơ bản:
+# 1. Tìm hiểu shell linux
+## 1.1 Các command cơ bản:
 - cd: chọn thư mục (cd .. để back lại thư mục trc đó)
 - ls: trả về 1 list file và folder
 - cp: copy file/thư mục sang 1 destination path
@@ -15,7 +15,7 @@
   - Nối file trước vào đuôi file sau: cat filenam1 >> filename2
   - Nối nội dung vào 1 file: cat >> filename
 - head -N filename: in N dòng đầu trong file (default là 10)
-## Các command liên quan đến quyền:
+## 1.2 Các command liên quan đến quyền:
 - chmod [options] [mode] [File_name]
   - [options]:
     - -R: áp dụng thay đổi quyền một cách đệ quy cho tất cả các tệp và thư mục trong thư mục đã chỉ định.
@@ -41,14 +41,14 @@
     - 4096: Đây là kích thước của thư mục hoặc tệp trong byte.
     - Jul 21 09:39: Đây là ngày và thời gian mà thư mục hoặc tệp được sửa đổi cuối cùng.
     - apache-maven: Đây là tên của thư mục hoặc tệp.   
-## Các command thực hiện song song:
+## 1.3 Các command thực hiện song song:
 - cat test.txt | wc -l: in ra số dòng của file
   - nếu chỉ có wc thì default là: số dòng - số từ - số kí tự
 - cat test.txt | grep "a": in ra tất cả các dòng chứa kí tự "a"
 - cat test.txt | head: in ra các dòng đầu tiên của file, defaut là 10
 - echo "aabb" > test.txt: ghi mới "aabb" vào file test.txt 
 - echo "cc" >> test.txt: nối tiếp "cc" vào file test.txt
-## Sử dụng vim:
+## 1.4 Sử dụng vim:
 Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng để cho phép chỉnh sửa văn bản hiệu quả, nỗ trợ hầu hết các loại tệp => vim còn được gọi là trình soạn thảo của lập trình viên  
 **Hướng dấn: vimtutor**
   - Tạo file mới: vim filename.txt
@@ -73,7 +73,7 @@ Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng đ�
     - Replace kí tự: r
     - Replace từ: re
     - Replace cả dòng: c$
-## Quản lý tiến trình:
+## 1.5 Quản lý tiến trình:
   - htop: chạy 1 giao diện giống lệnh top trên linux (show các tiến trình trên linux)
    https://www.cyberciti.biz/faq/how-to-install-htop-on-ubuntu-linux-using-apt/#:~:text=Procedure%20to%20install%20htop%20on%20Ubuntu%20Linux%201,snap%20install%20htop%205%20Launch%20htop%2C%20type%3A%20htop
     - Giải thích các cột:
@@ -104,3 +104,45 @@ Vim là 1 text editor nâng cao và có cấu hình cao được xây dựng đ�
   - [PID]: PID của tiến trình
     - VD: kill -9 6263 6199 6142 6076
     - Lấy PID tiến tình bằng lệnh pidof (VD: pidof firefox) => có thể gộp câu lệnh: kill -9 $(pidof firefox)
+# 2. Tìm hiểu Docker
+## 2.1 Chạy rest API cơ bản bằng flask python
+Tham khảo: https://www.digitalocean.com/community/tutorials/how-to-build-and-deploy-a-flask-application-using-docker-on-ubuntu-20-04#1-minor-inconsistency-in-uwsgi-ini
+### Bước 1: Set up flash application
+- Tạo 1 thư mục flash, bên trong nó có 1 thư mục con là app gồm 2 thư mục con là static và templates
+- Trong app, tạo file __init__.py với nội dung:
+      from flask import Flask
+      app = Flask(__name__)
+      from app import views
+- Trong app, ạo file views.py:
+       from app import app
+      @app.route('/') #đường dẫn gốc
+      def home(): #funtion home
+      return "hello world!"
+- Tạo file uwsgi.ini:
+    [uwsgi]
+    module = main
+    callable = app
+    master = true
+    sudo touch uwsgi.ini #cái này để cập nhật thay đổi mà k càn phải restart lại docker
+- Tạo file requirements.txt:
+    Flask>=2.0.2
+### Bước 2: Set up Docker
+- Tạo Dockerfiles: 
+FROM tiangolo/uwsgi-nginx-flask:python3.8-alpine
+RUN apk --update add bash nano
+ENV STATIC_URL /static
+ENV STATIC_PATH /var/www/app/static
+COPY ./requirements.txt /var/www/requirements.txt
+RUN pip install -r /var/www/requirements.txt
+- Check cổng xem có free không: sudo nc localhost 56733 < /dev/null; echo $?  (trả về 1 là đúng)
+- Tạo file start.sh và thực thi:
+  #!/bin/bash
+  app="docker.test"
+  docker build -t ${app} .
+  docker run -d -p 56733:80 \
+  --name=${app} \
+  -v $PWD:/app ${app}
+- Check containers: sudo docker ps
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4bb09224-1093-4648-baf2-1eaaf75343df)
+
+- ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2004f44f-bf48-49cd-85e0-aa171c8e6f9e)
