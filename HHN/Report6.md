@@ -164,4 +164,10 @@ def ping():
 ## 2.2 Call service từ terminal vào docker
 Tham khảo: https://docs.docker.com/language/python/build-images/
 - Clone thư mục python-docker: https://github.com/docker/python-docker
-- 
+- Sử dụng docker init để tạo tự động dockerfile và compose.yaml
+- Buil image bằng câu lệnh: docker build --tag python-docker .
+- Chạy docker, tạo GET request bằng câu lệnh: curl localhost:5000 => lỗi vì container đang chạy cục bộ trên mạng  
+  => Publish cổng 5000 trong container ra cổng 8000 bên ngoài: docker run --publish 8000:5000 python-docker
+- Call service trên terminal:  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f1f7ac74-b461-4be7-8046-b50e62a28405)
+
