@@ -143,7 +143,7 @@ RUN pip install -r /var/www/requirements.txt
   --name=${app} \  
   -v $PWD:/app ${app}  
 - Check containers: sudo docker ps
-- Kết quả:
+- Kết quả:  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/4bb09224-1093-4648-baf2-1eaaf75343df)
 ### Bước 3: Tạo template Ping - Pong
 - Trong app, tạo thư mục templates gồm 1 file pong.html:
