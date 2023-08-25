@@ -161,5 +161,7 @@ def ping():
 - Chạy: sudo touch uwsgi.ini  
 - Kết quả:  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/6b0e8243-7697-4189-a2c2-2f8f9df42225)
-
+## 2.2 Call service từ terminal vào docker
+Tham khảo: https://docs.docker.com/language/python/build-images/
+- Clone thư mục python-docker: https://github.com/docker/python-docker
 - 
