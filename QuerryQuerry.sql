@@ -8,7 +8,7 @@ CREATE TABLE exercises (
     category VARCHAR(100) NOT NULL,
     description TEXT
     );
-
+show create table exercises;
 CREATE TABLE gym_members (
     id INT PRIMARY Key Auto_Increment,
     name VARCHAR(100) NOT NULL,

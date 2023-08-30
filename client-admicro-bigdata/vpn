@@ -1,0 +1,5 @@
+#!/usr/bin/sh
+VPN_USER="namhoanghai@admicro.vn"
+VPN_PASSWORD="$(oathtool -b --totp 'NZQW22DPMFXGO2DB')b550fe1cf9674814"
+CONFIG_FILE=~/Downloads/client-admicro-bigdata/admicro-bigdata.ovpn
+echo 28122002 | sudo -S bash -c 'openvpn --config '"$CONFIG_FILE"' --auth-user-pass <(echo -e "'"$VPN_USER"'\n'"$VPN_PASSWORD"'")'
