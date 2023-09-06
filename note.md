@@ -10,11 +10,12 @@ cd
 # 3. 1 số câu lệnh khởi động
 - Máy chủ Master (NameNode):
 Namenode: Trên máy chủ master (NameNode), bạn chạy các dịch vụ quản lý dữ liệu HDFS bằng các lệnh như sau:
-  - Khởi động Namenode: hdfs namenode
-  - Khởi động Secondary Namenode (tuỳ chọn): hdfs secondarynamenode
-  - Khởi động ResourceManager (nếu bạn sử dụng YARN): yarn resourcemanager
+  - Khởi động Namenode: hdfs --daemon start namenode
+  - Khởi động Secondary Namenode (tuỳ chọn): hdfs --daemon start secondarynamenode
+  - Khởi động ResourceManager (nếu bạn sử dụng YARN): yarn --daemon start resourcemanager
 - Máy chủ Datanode:
 Datanode: Trên các máy chủ datanode, bạn chỉ cần chạy dịch vụ Datanode bằng lệnh sau:
-  - Khởi động Datanode: hdfs datanode
-  - Khởi động NodeManager (nếu bạn sử dụng YARN): yarn nodemanager
-
+  - Khởi động Datanode: hdfs --daemon start datanode
+  - Khởi động NodeManager (nếu bạn sử dụng YARN): yarn --daemon start nodemanager
+# 4. Kiểm tra nhật ký
+tail -n 1000 hadoop/logs/
