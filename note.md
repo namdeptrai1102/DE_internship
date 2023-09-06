@@ -5,3 +5,15 @@ cd data
 rm -rf dataNode nameNode
 mkdir dataNode nameNode
 cd
+Máy chủ Master (NameNode):
+
+Namenode: Trên máy chủ master (NameNode), bạn chạy các dịch vụ quản lý dữ liệu HDFS bằng các lệnh như sau:
+Khởi động Namenode: hdfs namenode
+Khởi động Secondary Namenode (tuỳ chọn): hdfs secondarynamenode
+Khởi động ResourceManager (nếu bạn sử dụng YARN): yarn resourcemanager
+Máy chủ Datanode:
+2. Datanode: Trên các máy chủ datanode, bạn chỉ cần chạy dịch vụ Datanode bằng lệnh sau:
+
+Khởi động Datanode: hdfs datanode
+Khởi động NodeManager (nếu bạn sử dụng YARN): yarn nodemanager
+Lưu ý rằng việc cài đặt và cấu hình Hadoop cụ thể có thể ảnh hưởng đến cách bạn khởi động dịch vụ. Hãy kiểm tra tài liệu cài đặt và cấu hình của bạn để biết thông tin chi tiết về cách chạy các dịch vụ Hadoop trên máy chủ master và máy chủ datanode của bạn
