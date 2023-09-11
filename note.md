@@ -19,3 +19,7 @@ Datanode: Trên các máy chủ datanode, bạn chỉ cần chạy dịch vụ D
   - Khởi động NodeManager (nếu bạn sử dụng YARN): yarn --daemon start nodemanager
 # 4. Kiểm tra nhật ký
 tail -n 1000 hadoop/logs/
+# 5. Xem list tiến trình, xóa tiến trình
+yarn application -list
+yarn application -kill application_1694426408331_0002
+
