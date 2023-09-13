@@ -29,7 +29,8 @@
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/8c4625df-4216-4950-a272-73c61e9f5186)
 - Kết quả:  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c9d28054-3795-44ec-aa99-0a31353eaeb4)
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/fdf30471-63e8-4325-a359-751cebf645f6)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/39934609-e6da-433c-a3a7-f7c096e28fd1)
+
 
 
 
