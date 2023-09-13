@@ -27,3 +27,6 @@ scp -P 2395 * hdfs3@10.5.92.26:/home/hdfs3/hadoop/etc/hadoop
 scp -P 2395 * hdfs3@10.5.93.113:/home/hdfs3/hadoop/etc/hadoop
 # 7. Demo WC
 hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output
+# 8. Hiện html
+curl 10.5.94.234:8080
+
