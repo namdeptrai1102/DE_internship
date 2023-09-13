@@ -32,6 +32,7 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/39934609-e6da-433c-a3a7-f7c096e28fd1)
 ### Sử dụng spark-shell cho kết quả tương tự
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/e2381c2e-3eb3-47f7-b493-7e04d4f3edaf)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/a0cd2d0f-085e-411d-beea-c9efc1663564)
 
 
 
