@@ -12,7 +12,7 @@
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/eca67662-6ac5-4ee1-8e53-a8fc919b5214)
 # 2. Chạy wordcount với hadoop mapreduce
 - Up load 3 quyển sách lên hdfs:
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2004af1-5962-4e59-8137-acaccf7b0a32)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7296619e-b792-48a0-82d1-e68a6238875c)
 - Chạy mapreduce với câu lệnh: hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output2  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/587be445-97f5-4921-81d0-8f6e0a6fab9b)
 - Kết quả (1 phần):  
