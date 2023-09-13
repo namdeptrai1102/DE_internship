@@ -20,6 +20,10 @@ Datanode: Trên các máy chủ datanode, bạn chỉ cần chạy dịch vụ D
 # 4. Kiểm tra nhật ký
 tail -n 1000 hadoop/logs/
 # 5. Xem list tiến trình, xóa tiến trình
-yarn application -list
+yarn application -list  
 yarn application -kill application_1694426408331_0002
-
+# 6. Copy thư mục từ xa
+scp -P 2395 * hdfs3@10.5.92.26:/home/hdfs3/hadoop/etc/hadoop  
+scp -P 2395 * hdfs3@10.5.93.113:/home/hdfs3/hadoop/etc/hadoop
+# 7. Demo WC
+hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output
