@@ -30,7 +30,8 @@
 - Kết quả:  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c9d28054-3795-44ec-aa99-0a31353eaeb4)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/39934609-e6da-433c-a3a7-f7c096e28fd1)
-
+### Sử dụng spark-shell cho kết quả tương tự
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/e2381c2e-3eb3-47f7-b493-7e04d4f3edaf)
 
 
 
