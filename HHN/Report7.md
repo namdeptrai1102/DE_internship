@@ -15,7 +15,14 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7296619e-b792-48a0-82d1-e68a6238875c)
 - Chạy mapreduce với câu lệnh: hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/587be445-97f5-4921-81d0-8f6e0a6fab9b)
-- Kết quả (1 phần):  
+- Kết quả (1 phần):
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/e55f8bd6-49da-4c90-a9b8-9fbb71763784)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/aeb3c9a2-d349-4d1a-a645-74215796b27c)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/130af97e-915c-43d2-b46c-a4237b13326d)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/db702d1b-f2ed-47df-b3db-823d67075d83)
+
+
+
 
 
 
