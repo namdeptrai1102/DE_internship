@@ -11,12 +11,11 @@
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/5f23f807-89aa-49c2-a1b2-c43e42c15527)
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/eca67662-6ac5-4ee1-8e53-a8fc919b5214)
 # 2. Chạy wordcount với hadoop mapreduce
-- Up load 3 quyển sách lên hdfs:
+- Up load sách alice.txt lên hdfs:  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7296619e-b792-48a0-82d1-e68a6238875c)
-- Chạy mapreduce với câu lệnh: hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output2  
+- Chạy mapreduce với câu lệnh: hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/587be445-97f5-4921-81d0-8f6e0a6fab9b)
 - Kết quả (1 phần):  
-  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/98109b70-cef1-4e63-85f3-69e0cf43b757) ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/da22bced-26cf-4f02-847d-58e8d9eadd20) ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/ce4e1cb0-c6af-4a69-a976-6d7d665500fa) ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/1af1ce61-e26f-4e32-ad9f-dbead4e3f65d)
 
 
 
