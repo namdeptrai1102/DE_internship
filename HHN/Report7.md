@@ -21,6 +21,15 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/130af97e-915c-43d2-b46c-a4237b13326d)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/db702d1b-f2ed-47df-b3db-823d67075d83)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/9829f36b-fbbd-4352-99ad-938db21be1ca)
+# 3. Chạy wordcount với spark
+- Tạo maven project:  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/74fe099e-330c-4575-84dd-e7df70d5a0f7)
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/1a822c64-a319-446f-9802-506017935523)
+- Submit job:  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/8c4625df-4216-4950-a272-73c61e9f5186)
+- Kết quả:  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c9d28054-3795-44ec-aa99-0a31353eaeb4)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/fdf30471-63e8-4325-a359-751cebf645f6)
 
 
 
