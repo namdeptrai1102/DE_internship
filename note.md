@@ -29,4 +29,22 @@ scp -P 2395 * hdfs3@10.5.93.113:/home/hdfs3/hadoop/etc/hadoop
 hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output
 # 8. Hiện html
 curl 10.5.94.234:8080
+# 9 Cài đặt & chạy jupyter notebook trong server
+- Tải Anaconda, install bằng: bash ~/Anaconda3-2023.07-2-Linux-x86_64.sh (nên chọn yes để default)
+- vi .bashrc, thêm đường dẫn PATH của anaconda, source ~/.bashrc (anaconda-navigator ko chạy đc trên terminal đâu đừng cố)
+- Kiểm tra các môi trường: conda env list
+- Tạo môi trường mới (jupy): conda create --name=jupy
+- Vào môi trường jupy: source  activate jupy
+- Cài đặt ipykernel để  chạy jupyter notebook: conda install -c anaconda ipykernel
+- Cài đặt jupyter notebook: python -m ipykernel install --user --name=jupy
+- Nếu không thấy file config thì: jupyter notebook --generate-config
+- Config cổng: vi /home/hdfs3/.jupyter/jupyter_notebook_config.py (thêm dòng c.NotebookApp.port = 9003)
+- Chạy jupyter notebook: jupyter-notebook --port=9003 --ip=0.0.0.0  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/9c508e82-be97-440c-a927-ca53b53841d2)
+Nhớ dùng token để đặt mật khẩu không thì đăng nhập vỡ mồm :))
+
+
+ 
+
+
 
