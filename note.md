@@ -42,7 +42,7 @@ curl 10.5.94.234:8080
 - Chạy jupyter notebook: jupyter-notebook --port=9003 --ip=0.0.0.0  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/9c508e82-be97-440c-a927-ca53b53841d2)
 Nhớ dùng token để đặt mật khẩu không thì đăng nhập vỡ mồm :))
-
+- Bật xong thì vào địa chỉ: http://10.5.94.234:9003/
 
  
 
