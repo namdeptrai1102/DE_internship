@@ -37,7 +37,8 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/3c4f28eb-4935-4d9b-b777-22614abf418a)  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/ad9ae7cd-dec4-4a89-bc48-ea5193183c1b)
 # 5. Thống kê và visualize
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7d886164-5bbe-4a97-808f-8ce6c2f76c76)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/abf22686-6de7-447f-a19e-351e062ec906)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/582ab3ed-51ea-4033-b762-26d7dd99ce7d)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b7c11028-7134-4d88-abaf-eb5d42cc7e73)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f97b6e48-7267-4c97-a303-5ba1d53cc140)
 
