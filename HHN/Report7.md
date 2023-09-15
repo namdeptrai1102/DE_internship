@@ -34,9 +34,12 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/e2381c2e-3eb3-47f7-b493-7e04d4f3edaf)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/a0cd2d0f-085e-411d-beea-c9efc1663564)
 # 4. Sinh dữ liệu người dùng với pyspark
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/aef257bb-3f8c-44f4-a939-3bcad03b36db)
-![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c2f0e6dd-fb1b-4b11-82f2-3a835799eb6f)
-
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/3c4f28eb-4935-4d9b-b777-22614abf418a)  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/ad9ae7cd-dec4-4a89-bc48-ea5193183c1b)
+# 5. Thống kê và visualize
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7d886164-5bbe-4a97-808f-8ce6c2f76c76)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b7c11028-7134-4d88-abaf-eb5d42cc7e73)
+![Uploading image.png…]()
 
 
 
