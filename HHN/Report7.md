@@ -33,6 +33,9 @@
 ### Sử dụng spark-shell cho kết quả tương tự
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/e2381c2e-3eb3-47f7-b493-7e04d4f3edaf)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/a0cd2d0f-085e-411d-beea-c9efc1663564)
+# 4. Sinh dữ liệu người dùng với pyspark
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/aef257bb-3f8c-44f4-a939-3bcad03b36db)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c2f0e6dd-fb1b-4b11-82f2-3a835799eb6f)
 
 
 
