@@ -39,7 +39,7 @@
 # 5. Thống kê và visualize
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7d886164-5bbe-4a97-808f-8ce6c2f76c76)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b7c11028-7134-4d88-abaf-eb5d42cc7e73)
-![Uploading image.png…]()
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f97b6e48-7267-4c97-a303-5ba1d53cc140)
 
 
 
