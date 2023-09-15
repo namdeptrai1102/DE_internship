@@ -27,9 +27,11 @@ scp -P 2395 * hdfs3@10.5.92.26:/home/hdfs3/hadoop/etc/hadoop
 scp -P 2395 * hdfs3@10.5.93.113:/home/hdfs3/hadoop/etc/hadoop
 # 7. Demo WC
 hadoop jar word_count/MapReduceExample-1.0-SNAPSHOT.jar demo.WC_Runner hdfs://10.5.94.234:8023/alice.txt hdfs://10.5.94.234:8023/r_output
-# 8. Hiện html
+# 8. Submit spark job
+spark-submit --class org.example.Main Spark-1.0-SNAPSHOT.jar
+# 9. Hiện html
 curl 10.5.94.234:8080
-# 9 Cài đặt & chạy jupyter notebook trong server
+# 10. Cài đặt & chạy jupyter notebook trong server
 - Tải Anaconda, install bằng: bash ~/Anaconda3-2023.07-2-Linux-x86_64.sh (nên chọn yes để default)
 - vi .bashrc, thêm đường dẫn PATH của anaconda, source ~/.bashrc (anaconda-navigator ko chạy đc trên terminal đâu đừng cố)
 - Kiểm tra các môi trường: conda env list
