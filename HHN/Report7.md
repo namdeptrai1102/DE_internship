@@ -41,8 +41,14 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/582ab3ed-51ea-4033-b762-26d7dd99ce7d)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/b7c11028-7134-4d88-abaf-eb5d42cc7e73)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f97b6e48-7267-4c97-a303-5ba1d53cc140)
-
-
+# 6. Đọc ghi file parquet với java spark submit  
+- Build maven project:  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/cfd61eb0-a41b-481c-92f7-dced792413d8)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7156e0a5-9f2d-4d40-9e14-4f7f873aa0d4)
+- Submit job:  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f4ab66a2-42f7-4708-a49f-448aa0731ab4)
+- Result:  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c0b16ae7-30f4-4c2e-b2e3-5ac664fe10c6)
 
 
 
