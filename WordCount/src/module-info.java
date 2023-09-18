@@ -1,0 +1,9 @@
+/**
+ * 
+ */
+/**
+ * @author hoanghainam
+ *
+ */
+module WordCount {
+}
