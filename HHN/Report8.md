@@ -12,3 +12,5 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/e4726783-1ef9-4f56-9107-b913b7ad9dcb)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/3aacb7ce-7842-4e5a-a942-ce600aa54076)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/ed4cbf41-a518-43bb-8c83-2e82e2ddfb8c)
+- Producer of data kbiet consumer of data là ai, cũng kbiet khi nào data được dùng => tách rời producers và consumers (asynchronous messaging) vs 2 pattens:
+- Publish subscribe (Pub-Sub): Producer tạo data và publishes lên 1 channel => message có thể đc nhiều consumers sử dụng và luôn được gửi đến theo thứ tự mà chúng đã đc publish.  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2a960fe-4e2f-4f92-a9e9-579ba23bf763)
