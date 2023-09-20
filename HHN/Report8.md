@@ -13,4 +13,5 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/3aacb7ce-7842-4e5a-a942-ce600aa54076)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/ed4cbf41-a518-43bb-8c83-2e82e2ddfb8c)
 - Producer of data kbiet consumer of data là ai, cũng kbiet khi nào data được dùng => tách rời producers và consumers (asynchronous messaging) vs 2 pattens:
-- Publish subscribe (Pub-Sub): Producer tạo data và publishes lên 1 channel => message có thể đc nhiều consumers sử dụng và luôn được gửi đến theo thứ tự mà chúng đã đc publish.  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2a960fe-4e2f-4f92-a9e9-579ba23bf763)
+  - Publish subscribe (Pub-Sub): Producer tạo data và publishes lên 1 channel => message có thể đc nhiều consumers sử dụng và luôn được gửi đến theo thứ tự mà chúng đã đc publish.  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2a960fe-4e2f-4f92-a9e9-579ba23bf763)
+  - Message queuing: publishes 1 message đến 1 channel đc consumer xử lý duy nhất 1 lần, khi đc xác nhận đã đc sử dụng thì message bị xóa khỏi queue  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/30729308-db34-4759-bf41-6b8051f77045)
