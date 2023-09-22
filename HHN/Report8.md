@@ -66,3 +66,7 @@
 ## 5.7 Producers
 - Tạo message, dùng message key gửi đến các partition tùy chỉnh
 ## 5.8 Consumers
+- Đọc các message (vận hành theo nhóm gọi là consumer group, cũng có thể chạy độc lập).
+- Mỗi phân vùng đc đọc bởi 1 cosumer nhưng 1 consumer có thể đọc nhiều phân vùng.
+- Nếu 1 cái lỗi thì những consumer còn lại sẽ cân bằng lại để chịu lỗi  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2a0e4520-2a87-4e0d-9cbf-6f87da0162b6)
