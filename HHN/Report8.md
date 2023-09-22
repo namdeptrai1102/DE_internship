@@ -50,8 +50,19 @@
 - Message chỉ có thể được thêm vào cuối phân vùng. (giống commit log)
 - Các phân vùng cho phép Kafka mở rộng quy mô theo chiều ngang và cũng cung cấp khả năng dự phòng. Mỗi phân vùng có thể được lưu trữ trên một máy chủ khác nhau => cho phép thêm các phân vùng mới vào 1 topic khi tải trên hệ thống tăng lên.
 ## 5.4 Message key
+- Ta có thể lựa chọn message sẽ sử dụng partion nào để đọc ghi với message key (optional)
+- Tất cả các message cùng key sẽ đc chuyển đến 1 phân vùng
 ## 5.5 Message offset
+- Message cũng có 1 metadata liên kết tới gọi là offset. Nó là 1 số nguyueen tăng dần dùng để xdinh thứ tự của message trong 1 phân vùng => consumer có thể tiếp tục từ nơi đã dùng lại trc đó
 ## 5.6 Schemas
+- Kafka không bắt buộc nhưng nó khuyến khích các message theo 1 định dạng có cấu trúc dễ hiểu (JSON, XML, Avro,...)
 ## 5.6 Brokers
+- Broker là 1 single Kafka server, nhiều broker vận hành như 1 cụm Kafka
+- Cluster sẽ đc điều phối bởi 1 trong những broker (gọi là controller), nó chịu trách nghiệm gán phân vùng cho các broker và giám sát lỗi. Controller đc bầu chọn bởi 5 thành viên trong cluster.
+- 1 phân vùng có thể đc sao chép và gán cho nhiều broker. Broker nào giữ phân vùng đc gọi là leader còn những partion-replicating broker là follower. Các producer và consumer sẽ kết nối vs leader.
+- Các message sẽ đc lưu trong Kafka 1 tgian rồi sẽ bị xóa sau 1 khoảng tgian hoặc khi topic đạt đến 1 độ lớn nhất định.
+- Broker có trách nhiệm nhận message từ producer và commit vào disk, nhận request và gửi các message từ các phân vùng đến consumer.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/6bd3fcac-7b3c-4e2a-aa7f-ef16f9da58bf)
 ## 5.7 Producers
+- Tạo message, dùng message key gửi đến các partition tùy chỉnh
 ## 5.8 Consumers
