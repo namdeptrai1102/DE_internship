@@ -82,3 +82,13 @@
   - Tác dụng phụ: những trạng thái duy trì và cache của consumer sẽ bị crash khi PR xảy ra vì lúc đó dữ liệu consumer sẽ phải đọc thành nhiều partition khác nhau  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/00305974-3473-4b74-85ea-651b288d9598)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/28f7fccb-9535-43af-a19c-845f12023af6)
+# 7. Producer
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/13869d29-7ffe-4ef9-8e87-566accfcbc75)
+## Write workflow
+1. Khởi tạo object từ class ProduceRecord chứa message(value) và topic dự định của nó (message key và partition là optional)
+2. Key và val đc gửi qua mạng sẽ đc serialized
+3. Data sau đó sẽ đc gửi đến partitioner để thực hiện phân vùng dựa trên khóa, nếu message đã đc chỉ định thì thôi k cần phân vùng cho nó
+4. Producer thêm message của 1 loạt record đang chờ gửi đến 1 topic và partition. Một luồng khác sẽ gửi các record tới Kafka broker.
+5. Khi broker nhận đc records và viết message tới Kafka thành công => trả về 1 object RecordMetadata chứa data về topic, partiton, và offset trong partition.
+6. Nếu ko write đc thì sẽ trả lỗi về producer, producer thử lại vài lần trc khi hủy.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2fe23c9-56be-494a-a47f-efe8f5f15200)
