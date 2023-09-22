@@ -92,3 +92,8 @@
 5. Khi broker nhận đc records và viết message tới Kafka thành công => trả về 1 object RecordMetadata chứa data về topic, partiton, và offset trong partition.
 6. Nếu ko write đc thì sẽ trả lỗi về producer, producer thử lại vài lần trc khi hủy.
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2fe23c9-56be-494a-a47f-efe8f5f15200)
+## Sending Message
+Có 3 cách để producer gửi message:
+- Fire and forget: message gửi đến Kafka mà k cần xác minh xem broker đã nhận đc chưa (hầu hết đều nhận đc cơ mà vx có thể lỗi)
+- Synchronous: Message đc gửi và 1 future object trả về sẽ có phương thức get() để gọi xem broker có nhận đc k
+- Asynchronous: Message đc gửi và callback đc gọi khi nhận đc phản hồi từ broker => producer có thể tiếp tục gửi các message mà k cần đợi phải hồi từ broker.
