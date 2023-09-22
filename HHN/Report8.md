@@ -82,7 +82,7 @@
   - Tác dụng phụ: những trạng thái duy trì và cache của consumer sẽ bị crash khi PR xảy ra vì lúc đó dữ liệu consumer sẽ phải đọc thành nhiều partition khác nhau  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/00305974-3473-4b74-85ea-651b288d9598)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/28f7fccb-9535-43af-a19c-845f12023af6)
-# 7. Producer
+# 7. Kafka Producer
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/13869d29-7ffe-4ef9-8e87-566accfcbc75)
 ## Write workflow
 1. Khởi tạo object từ class ProduceRecord chứa message(value) và topic dự định của nó (message key và partition là optional)
@@ -97,3 +97,14 @@ Có 3 cách để producer gửi message:
 - Fire and forget: message gửi đến Kafka mà k cần xác minh xem broker đã nhận đc chưa (hầu hết đều nhận đc cơ mà vx có thể lỗi)
 - Synchronous: Message đc gửi và 1 future object trả về sẽ có phương thức get() để gọi xem broker có nhận đc k
 - Asynchronous: Message đc gửi và callback đc gọi khi nhận đc phản hồi từ broker => producer có thể tiếp tục gửi các message mà k cần đợi phải hồi từ broker.
+# 8. Kafka consumer
+- Hiện nay, 1 hay nhiều producer có thể viết message đến 1 topic nhnah hơn nhiều so vs consumer có thể đọc, Kafka giảm thiểu điều này bằng cách cho phép nhiều consumer trong 1 group consumer có thể cùng nhau đọc message từ 1 topic. 1 số cấu hình cho topic:
+  - Partitions in a topic and consumers in a group are equal: mỗi consumer đọc từ 1 phân vùng:  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/c064281d-5521-4619-af16-10c2f1f05620)
+  - Partitions in a topic are greater than the number of consumers in a group:  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/88323a20-16f3-4294-a124-d7fa8393ff90)
+  - Single Consumer:  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/0d4be7d2-6303-4773-b969-f3a5e4c367d4)
+  - Partitions in a topic are less than the number of consumers in a group:  
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/87cac4e2-3f5f-4f00-9d13-c74247a2e251)
+- Consumer tăng trong group consumer là cơ chế chính để Kafka mở rộng quy mô khi số lượng tin nhắn trong một topic tăng lên => nên có nhiều phân vùng trong một topic để có thể tăng số lượng người tiêu dùng khi tải tăng. 
