@@ -44,3 +44,9 @@
 - Messange được viết và đọc từ các topic, mỗi topic được coi là 1 folder trong hệ điều hành.
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/9e76ea9c-b1ac-4c48-8424-b4f367b28c94)
 # 5.3 Partition
+## 5.4 Message key
+## 5.5 Message offset
+## 5.6 Schemas
+## 5.6 Brokers
+## 5.7 Producers
+## 5.8 Consumers
