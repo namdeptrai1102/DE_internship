@@ -13,7 +13,7 @@
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/3aacb7ce-7842-4e5a-a942-ce600aa54076)
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/ed4cbf41-a518-43bb-8c83-2e82e2ddfb8c)
 - Producer of data kbiet consumer of data là ai, cũng kbiet khi nào data được dùng => tách rời producers và consumers (asynchronous messaging) vs 2 pattens:
-  - Publish subscribe (Pub-Sub): Producer tạo data và publishes lên 1 channel => message có thể đc nhiều consumers sử dụng và luôn được gửi đến theo thứ tự mà chúng đã đc publish.  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2a960fe-4e2f-4f92-a9e9-579ba23bf763)
+  - Publish subscribe (Pub-Sub): Producer tạo data và publishes lên 1 channel/topic => message có thể đc nhiều consumers sử dụng và luôn được gửi đến theo thứ tự mà chúng đã đc publish.  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/f2a960fe-4e2f-4f92-a9e9-579ba23bf763)
   - Message queuing: publishes 1 message đến 1 channel đc consumer xử lý duy nhất 1 lần, khi đc xác nhận đã đc sử dụng thì message bị xóa khỏi queue  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/30729308-db34-4759-bf41-6b8051f77045)
 - Các trường hợp sdung kafka:
   - Ban đầu nó đc phát triển bởi LinkedIn để track user activity (page views, click tracking, modifications to profile, etc.) and system metrics in real-time.
@@ -35,3 +35,10 @@
   - DB có thể tua lại và xem qua events trong commit log và thực hiện các thay đổi đối với cơ sở dữ liệu một cách không đồng bộ. Kể cả khi các thay đổi chưa được thực hiện và xảy ra sự cố, cơ sở dữ liệu vẫn có thể khôi phục bằng cách sử dụng các thay đổi được ghi lại trong commit log.
   - Tóm lại: commit log được sử dụng để tạo lại hoặc sao chép các thay đổi. VD: bản sao của cơ sở dữ liệu có thể đọc các thay đổi từ nhật ký cam kết để tự điều chỉnh theo trạng thái của bản sao cơ sở dữ liệu đang hoạt động.
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/0e4521a3-fef4-434e-ae0f-57026b9d1096)
+# Components of Kafka
+## Message
+- Đối vs Kafka, message đơn giản là 1 mảng byte
+- Đơn vị dữ liệu trong Kafka ecosystem, giống như 1 record trong 1 bảng relational DB.
+  - Message đc gửi theo nhóm và nén lại vs nhau để giảm chi phí
+  ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7ace101d-5efa-4a4a-8c58-b8940041259c)
+- Messange được viết và đọc từ các topic, mỗi topic được coi là 1 folder trong hệ điều hành.
