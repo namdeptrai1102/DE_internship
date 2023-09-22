@@ -70,3 +70,15 @@
 - Mỗi phân vùng đc đọc bởi 1 cosumer nhưng 1 consumer có thể đọc nhiều phân vùng.
 - Nếu 1 cái lỗi thì những consumer còn lại sẽ cân bằng lại để chịu lỗi  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/2a0e4520-2a87-4e0d-9cbf-6f87da0162b6)
+# 6. Partitions
+- Ta có thể chọn tạo message key hoặc ko, nếu ko thì Kafka có cơ chế tự gán default cho phân vùng theo round-robin
+- Nếu khóa được xác định nhưng class của phân vùng thì ko => trình phân vùng default đc dùng: nó tạo 1 hàm băm của khóa (bất biến), các message cùng khóa luôn có cùng gtri băm và dc giử đến phân vùng
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/7c3f472f-b496-49dd-b016-8b35a5a5d756)
+- Partition Rebalancer
+  - Các consumer trong consumer group được điều phối bởi 1 broker (điều phối viên nhóm). Broker lắng nghe heartbeat của consumer, nếu nhận thấy 1 cái crash thì sẽ kích hoạt partion rebalance => high availability and scalability
+  - Partition Rebalancer là quá trình chỉ định cviec của phân vùng đã chết cho phân vùng còn khỏe mạnh (trong cùng 1 comsumer group). PR cx có thể thực hiện khi ta add thêm partition vào topic.
+  - Khi PR đang đc thực thi, consumer không thể đọc được
+  - Khi consumer tbao vs coordinator là nó muốn rời khỏi group, coordinator không cần kiểm tra xem nó là consumer nào mà bắt đầu PR luôn.
+  - Tác dụng phụ: những trạng thái duy trì và cache của consumer sẽ bị crash khi PR xảy ra vì lúc đó dữ liệu consumer sẽ phải đọc thành nhiều partition khác nhau  
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/00305974-3473-4b74-85ea-651b288d9598)
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/28f7fccb-9535-43af-a19c-845f12023af6)
