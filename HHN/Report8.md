@@ -22,3 +22,14 @@
   - Kafka dựa trên commit log (nhật ký ghi nhận) để lưu trữ và theo dõi các sự kiện. Khi dữ liệu trong cơ sở dữ liệu thay đổi (ví dụ: một bản ghi được thêm, sửa đổi hoặc xóa), thông tin về thay đổi đó được ghi vào commit log của Kafka. Từ commit log này, có thể trích xuất thông tin về các thay đổi dữ liệu và sử dụng nó để sao chép các cập nhật cơ sở dữ liệu đó lên hệ thống từ xa => data trên hệ thống từ xa luôn cập nhật và đồng bộ với cơ sở dữ liệu gốc.
   - Stream processing: Kafka có thể đc dùng bởi các streaming frameworks (VD: MapReduce), cho phép các application có thể vận hành các Kafka messages cho vc đếm số liệu, partitioning, combining messages, hoặc applying transformations.  
 ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/d87b5b79-24ac-4800-8c69-5c340f4f0bef)
+# Commit log
+- Commit log là 1 chuỗi các record trong đó mỗi record có ID riêng.
+- Đặc điểm:
+  - Chỉ có thể thêm record vào cuối commit log
+  - Records immutable
+  - Commit log luôn đc đọc từ trái sang phải
+- Database và cache thường dùng commit log để build lại hệ thống sau sự cố hoặc tối ưu hiệu suất:
+  - Mọi thay đổi trước tiên sẽ được ghi vào commit log trước DB (ghi vào commit log) => Cho phép DB trì hoãn việc thực hiện các thay đổi trên đĩa mà chỉ phản ánh chúng trong bộ nhớ.
+  - DB có thể tua lại và xem qua events trong commit log và thực hiện các thay đổi đối với cơ sở dữ liệu một cách không đồng bộ. Kể cả khi các thay đổi chưa được thực hiện và xảy ra sự cố, cơ sở dữ liệu vẫn có thể khôi phục bằng cách sử dụng các thay đổi được ghi lại trong commit log.
+  - Tóm lại: commit log được sử dụng để tạo lại hoặc sao chép các thay đổi. VD: bản sao của cơ sở dữ liệu có thể đọc các thay đổi từ nhật ký cam kết để tự điều chỉnh theo trạng thái của bản sao cơ sở dữ liệu đang hoạt động.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/0e4521a3-fef4-434e-ae0f-57026b9d1096)
