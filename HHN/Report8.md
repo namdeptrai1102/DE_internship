@@ -43,7 +43,12 @@
 ## 5.2 Topic/channel
 - Messange được viết và đọc từ các topic, mỗi topic được coi là 1 folder trong hệ điều hành.
   ![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/9e76ea9c-b1ac-4c48-8424-b4f367b28c94)
-# 5.3 Partition
+## 5.3 Partition
+1 topic đc chia nhỏ thành các partition, lưu ý:
+- Message chỉ được sắp xếp theo thời gian trong một phân vùng, không phải trên toàn bộ topic.
+- Message được đọc từ đầu đến cuối trong một phân vùng.
+- Message chỉ có thể được thêm vào cuối phân vùng. (giống commit log)
+- Các phân vùng cho phép Kafka mở rộng quy mô theo chiều ngang và cũng cung cấp khả năng dự phòng. Mỗi phân vùng có thể được lưu trữ trên một máy chủ khác nhau => cho phép thêm các phân vùng mới vào 1 topic khi tải trên hệ thống tăng lên.
 ## 5.4 Message key
 ## 5.5 Message offset
 ## 5.6 Schemas
