@@ -28,6 +28,8 @@
   - Chỉ có thể thêm record vào cuối commit log
   - Records immutable
   - Commit log luôn đc đọc từ trái sang phải
+  - Đơn giản, nhanh chóng và có thể xử lý khối lượng dữ liệu lớn tốt hơn cơ sở dữ liệu quan hệ truyền thống
+  - Một hệ thống phức tạp có thể tiếp tục hoạt động khi một số thành phần phụ nhất định gặp lỗi
 - Database và cache thường dùng commit log để build lại hệ thống sau sự cố hoặc tối ưu hiệu suất:
   - Mọi thay đổi trước tiên sẽ được ghi vào commit log trước DB (ghi vào commit log) => Cho phép DB trì hoãn việc thực hiện các thay đổi trên đĩa mà chỉ phản ánh chúng trong bộ nhớ.
   - DB có thể tua lại và xem qua events trong commit log và thực hiện các thay đổi đối với cơ sở dữ liệu một cách không đồng bộ. Kể cả khi các thay đổi chưa được thực hiện và xảy ra sự cố, cơ sở dữ liệu vẫn có thể khôi phục bằng cách sử dụng các thay đổi được ghi lại trong commit log.
