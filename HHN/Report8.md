@@ -115,3 +115,9 @@ Có 3 cách để producer gửi message:
   - General pattern dành cho consumer là thăm dò các message mới và xử lý chúng trong 1 vòng lặp vô hạn (poll loop). Phg thức poll() chờ 1 khoảng tgian mà consumer chặn (khi k có data trong consumer buffer). Nếu tgian đó = 0 thì method return luôn. Heartbeat đc gửi cho broker như 1 phần của poll method.
   - Poll() đc gọi lần đầu với 1 consumer mới, lệnh này có vai trò tìm và tgia GroupCoordinator, nhận partition assignment.
 ## 8.3 Commits and Offsets
+- Consumer thăm dò các phân vùng topic = phương thức poll() trả về records để consumer xử lý. Tuy nhiên, nếu rebalance và phân vùng được gán cho consumer khác trong cosumer group => consumer mới phải biết cái trước đó đã dừng ở đâu để tiếp tục đọc bản ghi từ thời điểm đó trở đi trong phân vùng.
+- Offset xdinh vị trí mà consumer đã đọc, việc lưu trữ hoặc update offset lâu dài là commit. Kafka ko theo dõi các records đã đọc, vc này là của consumer tự commit offset của tất cả phân vùng nó đang đọc = cách viết message đến topic: __consumer_offsets.
+- Committed offset less than last record read: VD consumer đọc 4 message cùng lúc. Nó đọc tối đa 6 message nhưng commit offset cuối cùng được ghi là 4. Nếu consumer crash và 1 consumer khác xử lý phân vùng này thì nó sẽ bắt đầu đọc message bắt đầu từ record được đánh số 5 => 1 số bản ghi sẽ được xử lý hai lần.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/86ee910e-3562-4ab1-93d9-0953873e950e)
+- Committed offset greater than last record read: Nếu committed offset > offset của record cuối cùng thì các record giữa hai offset sẽ bị consumer group bỏ qua khi tái cân bằng. Ví dụ bên dưới, các bản ghi số 7 và 8 sẽ bị bỏ qua.
+![image](https://github.com/namdeptrai1102/DE_internship/assets/109681639/28bfd5b9-c294-424d-b4f3-d1c6112ecd51)
